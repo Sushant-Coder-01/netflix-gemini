@@ -1,13 +1,8 @@
-import "./App.css";
+import Body from "./components/Body";
+
 
 function App() {
-  return (
-    <div className="App">
-      <div className="text-4xl text-orange-800 m-4 p-4 font-bold">
-        Hii, I am creating netflix-gpt project
-      </div>
-    </div>
-  );
+  return <Body />;
 }
 
 export default App;
