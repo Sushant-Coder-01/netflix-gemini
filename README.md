@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Netflix-GPT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+    - Run `npx create-react-app` to create react app.
+    - Configure the TailwindCSS.
 
-## Available Scripts
+## Project-Plan
 
-In the project directory, you can run:
+### 1. Authentication
 
-### `npm start`
+- **Login/Sign Up Pages**
+  - Sign Up Page
+    - Input fields: username, email, password
+    - Validation and error handling
+  - Password Recovery Page
+  - Sign In Page
+    - Input fields: email, password
+    - Remember Me feature
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. Browse Movies (Post Authentication)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Header**
+  - Navigation links (Home, Watchlist, Profile)
+  - Search bar for quick movie lookup
+  
+- **Main Movie Section**
+  - Featured movie trailer in the background
+  - Movie title and description overlay
+  - Dynamic movie suggestions based on user preferences
+  - Movie lists (e.g., Trending, Top Rated, etc.)
 
-### `npm test`
+- **User Interaction**
+  - Add to Watchlist button for each movie
+  - Rating system (1-5 stars) for movies
+  - Review submission for user feedback
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 3. NetflixGPT Feature
 
-### `npm run build`
+- **Search Bar**
+  - AI-powered search that understands natural language queries
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Personalized Recommendations**
+  - Implement state management with Redux Toolkit (RTK) to handle user preferences and viewing history
+  - Fetch movie data from third-party APIs (e.g., TMDb, OMDb)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 4. Unique Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Watch Together Feature**
+  - Allow users to invite friends to watch movies simultaneously (simulated version)
 
-### `npm run eject`
+- **Customizable User Profiles**
+  - Enable users to create profiles with unique avatars and preferences
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 5. Enhanced User Experience
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Interactive UI Elements**
+  - Use Tailwind CSS for animations and transitions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Dynamic Content Loading**
+  - Implement lazy loading for movie lists using React's `Suspense`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Dark Mode**
+  - Provide a toggle for dark mode using Tailwind's dark class feature
 
-## Learn More
+### 6. Advanced Functionalities
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Watchlist Management**
+  - Store watchlist in Redux state and local storage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Reminders and Notifications**
+  - Use the browser's Notification API for user reminders
 
-### Code Splitting
+- **User Feedback Loop**
+  - Collect user ratings and feedback on recommendations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 7. Testing and Deployment
 
-### Analyzing the Bundle Size
+- **Testing**
+  - Write unit tests using React Testing Library & Jest
+- **Deployment**
+  - Host on platforms like `Vercel` or `Netlify` for easy deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 8. Documentation and Presentation
 
-### Making a Progressive Web App
+- **User Documentation**
+  - In-app tooltips and modals for guidance
+- **Tech Stack Showcase**
+  - Detailed README in GitHub repository explaining features and tech stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 9. Future Enhancements (Optional)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Explore backend integration for more advanced features
+- Implement user authentication with JWT or OAuth for enhanced security
