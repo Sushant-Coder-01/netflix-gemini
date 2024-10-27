@@ -2,6 +2,20 @@
 
     - Run `npx create-react-app` to create react app.
     - Configure the TailwindCSS.
+    - Header
+    - Routing of our app
+    - Login Page
+    - Sign Up Page
+    - Form Validation 
+    - useRef() Hook
+    - Firebase Setup
+    - Deploy app to production 
+    - Create Sign Up User account.
+    - Implemented Sign-in user API
+    - Create User Store with userSlice.
+    - Implemented Sign Out.
+    - Update Profile
+    - Fetch Movie Details from TMDB Movie DB.
 
 ## Project-Plan
 
@@ -9,7 +23,7 @@
 
 - **Login/Sign Up Pages**
   - Sign Up Page
-    - Input fields: username, email, password
+    - Input fields: full name, username, email, password
     - Validation and error handling
   - Password Recovery Page
   - Sign In Page
