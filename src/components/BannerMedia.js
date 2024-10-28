@@ -4,16 +4,13 @@ const BannerMedia = ({ movieId }) => {
   const trailerVideo = useMovieVideo(movieId);
 
   return (
-    <div className="absolute w-screen overflow-hidden">
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
       <iframe
-        className="w-screen aspect-video"
-        src={
-          "https://www.youtube.com/embed/" +
-          trailerVideo?.key +
-          "?si=Sh-f0iq9pI3vVRxR&autoplay=1&mute=1&loop=1"
-        }
+        className="relative w-full aspect-video"
+        src={`https://www.youtube.com/embed/${trailerVideo?.key}?controls=0&showinfo=0&modestbranding=0&autoplay=1&mute=1&loop=1&playlist=${trailerVideo?.key}`}
         title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
       ></iframe>
     </div>
   );

@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <div className="absolute z-10">
-      <div className="w-full h-16 sm:h-12 md:h-16 lg:h-16 xl:h-16 bg-gradient-to-b from-black fixed">
+      <div className="w-full h-16 sm:h-12 md:h-20 lg:h-16 xl:h-16 bg-gradient-to-b from-black fixed">
         <div className="flex justify-between items-center px-4 sm:px-6 lg:px-8">
           {/* Left Section - Logo and Navigation Links */}
           <div className="flex items-center gap-2">

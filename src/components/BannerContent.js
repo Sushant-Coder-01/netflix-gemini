@@ -7,7 +7,7 @@ const BannerContent = ({ title, overview, movieId }) => {
   console.log(title);
 
   return (
-    <div className="absolute bg-gradient-to-r from-black/90 w-screen aspect-video pt-80 pl-12 ">
+    <div className="absolute bg-gradient-to-r from-black/90 w-screen h-screen pt-80 pl-12 ">
       <div className="w-64 my-10 ">
         {filePath ? (
           <img
@@ -19,12 +19,12 @@ const BannerContent = ({ title, overview, movieId }) => {
         )}
       </div>
       <div className="flex gap-4">
-        <div className="flex items-center px-8 py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70">
+        <div className="flex items-center px-8 py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70 cursor-pointer">
           <p className="rounded-sm text-2xl ">⏵ Play</p>
           <p className="rounded-sm text-2xl"></p>
         </div>
 
-        <div className="flex items-center px-8 py-2 bg-gray-500/50 text-white gap-2 font-semibold rounded-sm">
+        <div className="flex items-center px-8 py-2 bg-gray-500/50 text-white gap-2 font-semibold rounded-sm hover:bg-gray-500/30 cursor-pointer">
           <p className="rounded-sm text-2xl">ⓘ</p>
           <p className="rounded-sm text-2xl">More Info</p>
         </div>
