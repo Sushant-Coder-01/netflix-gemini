@@ -16,6 +16,17 @@
     - Implemented Sign Out.
     - Update Profile
     - Fetch Movie Details from TMDB Movie DB.
+    - Bug Fix: Add displayName and photoURL to sign up component.
+    - Bug Fix: Restrict routing for login to browse and vice-versa.
+    - Unsubscribed the onAuthStateChanged() callback
+    - Add hardcoded values into Constant file.
+    - Register TMDB API & create an App & get access token
+    - Get data from TMDM now playing movie List API call.
+    - Custom hook for now playing movies
+    - Fetch data for trailer video
+    - Update store with trailerVideo Data
+    - Embedded the Youtube video and make it AutoPlay and mute
+    - Improve UI for HeroBanner Page
 
 ## Project-Plan
 

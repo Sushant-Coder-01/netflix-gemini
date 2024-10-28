@@ -1,3 +1,5 @@
+import { NETFLIX_LOGO } from "../utils/constants";
+
 const Header = () => {
   return (
     <div>
@@ -12,14 +14,10 @@ const Header = () => {
                 md:w-52 md:mx-16 md:my-3 
                 lg:my-5 xl:mx-32 xl:my-5"
       >
-        <img
-          alt="netflix-logo"
-          src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        />
+        <img alt="netflix-logo" src={NETFLIX_LOGO} />
       </div>
     </div>
   );
 };
 
 export default Header;
-

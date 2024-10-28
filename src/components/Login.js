@@ -1,22 +1,21 @@
 import { useRef, useState } from "react";
-import HomePageLogo from "./HomePageLogo";
+import HomePageLogo from "./LoginPageHeader";
 import {
   validateFormDataForSignIn,
   validateFormDataForSignUp,
 } from "../utils/validate";
-import { LOGIN_BACKGROUND_IMAGE } from "../utils/constants";
+import { LOGIN_BACKGROUND_IMAGE, USER_AVATAR } from "../utils/constants";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { addUser } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const [isSignIn, setisSignIn] = useState(false);
+  const [isSignIn, setisSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
 
   const email = useRef(null);
@@ -24,7 +23,6 @@ const Login = () => {
   const fullName = useRef(null);
   const userName = useRef(null);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handlerSignInBtn = () => {
@@ -59,8 +57,7 @@ const Login = () => {
 
           updateProfile(user, {
             displayName: fullName.current.value,
-            photoURL:
-              "https://media.licdn.com/dms/image/v2/D4D35AQHlVj3kjEcJnw/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1722784321684?e=1730649600&v=beta&t=Q-fXHUePPyoAt-7fPGzlwUUhu9uuW1xYOoEC6bNvfaE",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -72,7 +69,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => setErrorMessage(error));
         })
@@ -89,12 +85,10 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           setErrorMessage(errorCode);
-          navigate("/error");
         });
     }
   };
@@ -127,7 +121,6 @@ const Login = () => {
             <input
               ref={fullName}
               type="text"
-              autoComplete="current-password"
               placeholder="Full Name"
               className="p-3 my-3 mx-4 rounded-md  bg-white bg-opacity-20 "
             ></input>
@@ -144,7 +137,6 @@ const Login = () => {
             <input
               ref={userName}
               type="text"
-              autoComplete="current-password"
               placeholder="Username"
               className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
             ></input>
@@ -165,7 +157,6 @@ const Login = () => {
             ref={email}
             type="text"
             placeholder="E-mail"
-            autoComplete="current-password"
             className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
           ></input>
 
@@ -184,7 +175,6 @@ const Login = () => {
             ref={password}
             type="password"
             placeholder="Password"
-            autoComplete="current-password"
             className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
           ></input>
 
@@ -210,9 +200,8 @@ const Login = () => {
             : errorMessage === "auth/invalid-credential" && (
                 <div className="my-2">
                   <p className="text-red-900 mx-4 font-semibold">
-                    No account found with this email!
+                    Invalid Credentials !
                   </p>
-                  <p className="text-red-900 mx-4 font-bold">Please Sign Up.</p>
                 </div>
               )}
 
