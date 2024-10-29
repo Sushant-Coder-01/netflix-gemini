@@ -6,7 +6,6 @@ import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
-
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
