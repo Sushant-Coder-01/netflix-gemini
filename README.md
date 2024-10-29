@@ -27,6 +27,10 @@
     - Update store with trailerVideo Data
     - Embedded the Youtube video and make it AutoPlay and mute
     - Improve UI for HeroBanner Page
+    - Build Movie List & Cards
+    - Use TMDB CDN_URL ( Image )
+    - Build Home Page Amazing using Tailwind CSS
+    - Build custom hooks for movie lists
 
 ## Project-Plan
 
