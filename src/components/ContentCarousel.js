@@ -1,16 +1,33 @@
 import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
+import { lang } from "../utils/languageConstants";
 
 const ContentCarousel = () => {
   const movies = useSelector((store) => store.movies);
+  const langKey = useSelector((store) => store.config.lang);
   return (
     <div className="bg-black">
       <div className="relative -mt-64">
-        <MovieList title={"Trending"} movies={movies?.trendingMovies} />
-        <MovieList title={"Now Playing"} movies={movies?.nowPlayingMovies} />
-        <MovieList title={"Popular"} movies={movies?.popularMovies} />
-        <MovieList title={"Top Rated"} movies={movies?.topRatedMovies} />
-        <MovieList title={"Upcoming"} movies={movies?.upcomingMovies} />
+        <MovieList
+          title={lang[langKey].trending}
+          movies={movies?.trendingMovies}
+        />
+        <MovieList
+          title={lang[langKey].nowPlaying}
+          movies={movies?.nowPlayingMovies}
+        />
+        <MovieList
+          title={lang[langKey].popular}
+          movies={movies?.popularMovies}
+        />
+        <MovieList
+          title={lang[langKey].topRated}
+          movies={movies?.topRatedMovies}
+        />
+        <MovieList
+          title={lang[langKey].upcoming}
+          movies={movies?.upcomingMovies}
+        />
       </div>
     </div>
   );

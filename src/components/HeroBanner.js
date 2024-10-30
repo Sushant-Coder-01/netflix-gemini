@@ -6,7 +6,7 @@ const HeroBanner = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
   if(!movies) return;
 
-  const BannerMovie = movies[16];
+  const BannerMovie = movies[18];
 
   const {original_title, overview, id} = BannerMovie;
   
