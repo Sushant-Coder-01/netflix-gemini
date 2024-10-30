@@ -155,7 +155,7 @@ const Login = () => {
           )}
           <input
             ref={email}
-            type="text"
+            type="email"
             placeholder="E-mail"
             className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
           ></input>
@@ -216,7 +216,7 @@ const Login = () => {
           )}
 
           <button
-            type="button"
+            type="submit"
             className="p-2 my-4 mx-4 rounded-md bg-red-700"
             onClick={handleButtonClick}
           >
