@@ -31,7 +31,7 @@ const BannerContent = ({ title, overview, movieId }) => {
           </div>
           <div className="flex gap-4">
             <div className="flex items-center px-8 py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70 cursor-pointer">
-              {/* <p className="rounded-sm text-2xl ">⏵ {lang[langKey].playBtn}</p> */}
+              <p className="rounded-sm text-2xl ">⏵ {lang[langKey].playBtn}</p>
               <p className="rounded-sm text-2xl"></p>
             </div>
 
@@ -39,7 +39,7 @@ const BannerContent = ({ title, overview, movieId }) => {
               className="flex items-center px-8 py-2 bg-gray-500/50 text-white gap-2 font-semibold rounded-sm hover:bg-gray-500/30 cursor-pointer"
               onClick={handleMoreInfoClick}
             >
-              {/* <p className="rounded-sm text-2xl">ⓘ</p> */}
+              <p className="rounded-sm text-2xl">ⓘ</p>
               <p className="rounded-sm text-2xl">{lang[langKey].moreInfoBtn}</p>
             </div>
           </div>

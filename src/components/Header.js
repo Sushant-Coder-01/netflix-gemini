@@ -96,11 +96,11 @@ const Header = () => {
             <div onClick={handleProfileConfigToggle}>
               {profileConfig ? (
                 <p className="text-white text-xl cursor-pointer transition-transform duration-300 ease-in-out transform rotate-90">
-                  {/* ⏵ */}
+                  ⏵
                 </p>
               ) : (
                 <p className="text-white text-xl cursor-pointer transition-transform duration-300 ease-in-out transform -rotate-90">
-                  {/* ⏵ */}
+                  ⏵
                 </p>
               )}
             </div>

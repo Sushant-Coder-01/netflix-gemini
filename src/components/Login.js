@@ -45,8 +45,6 @@ const Login = () => {
     if (!isSignIn) {
       createUserWithEmailAndPassword(
         auth,
-        // fullName.current.value,
-        // userName.current.value,
         email.current.value,
         password.current.value
       )
