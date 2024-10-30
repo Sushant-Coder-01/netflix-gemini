@@ -31,6 +31,7 @@ const useMovieVideo = (movieId) => {
   }, []);
 
   const trailerVideo = useSelector((store) => store.movies?.movieTrailer);
+  console.log(trailerVideo);
   return trailerVideo;
 };
 

@@ -13,8 +13,7 @@ export const GET_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODU2MzNlOGQ4ODdmN2FlYjk4NjFmYzdiMzNjNzk4MCIsIm5iZiI6MTczMDA5NDAyNS4xMjA4ODksInN1YiI6IjY3MWYyMjRiMjdiZDU3ZDkxZjYzMWFkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BoMRpkBrLu0cmfQLRLvIHD7mosz2Zcsq9d_w8hW_6SA",
+    Authorization: process.env.REACT_APP_BEARER_TOKEN,
   },
 };
 
@@ -27,4 +26,9 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "en", name: "English" },
   { identifier: "hindi", name: "हिंदी" },
   { identifier: "marathi", name: "मराठी" },
+  { identifier: "tamil", name: "Tamil" },
+  { identifier: "telugu", name: "Telugu" },
+  { identifier: "spanish", name: "Spanish" },
+  { identifier: "korean", name: "Korean" },
+  { identifier: "japanese", name: "Japanese" },
 ];

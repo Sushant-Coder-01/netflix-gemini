@@ -18,8 +18,8 @@ const BannerContent = ({ title, overview, movieId }) => {
   return (
     <div className="absolute inset-0 bg-gradient-to-r from-black/70 w-full overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-black w-full overflow-hidden">
-        <div className="pt-80 pl-12 w-screen">
-          <div className="w-64 my-10 ">
+        <div className="pt-72 pl-12 w-screen flex flex-col space-y-2">
+          <div className="w-64">
             {filePath ? (
               <img
                 src={`https://image.tmdb.org/t/p/original/${filePath}`}
@@ -29,6 +29,10 @@ const BannerContent = ({ title, overview, movieId }) => {
               <h1 className="text-white text-4xl w-96">{title}</h1>
             )}
           </div>
+          
+
+          <div>{showOverview ? <MovieOverview overview={overview} /> : <div className=""></div>}</div>
+
           <div className="flex gap-4">
             <div className="flex items-center px-8 py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70 cursor-pointer">
               <p className="rounded-sm text-2xl ">⏵ {lang[langKey].playBtn}</p>
@@ -43,7 +47,6 @@ const BannerContent = ({ title, overview, movieId }) => {
               <p className="rounded-sm text-2xl">{lang[langKey].moreInfoBtn}</p>
             </div>
           </div>
-          {showOverview ? null : <MovieOverview overview={overview}/>}
         </div>
       </div>
     </div>

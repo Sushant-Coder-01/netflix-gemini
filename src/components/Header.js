@@ -66,7 +66,7 @@ const Header = () => {
                       {lang[langKey].gptSearchBtnPlaceholder}
                     </p>
                     <span className="text-xl text-white cursor-pointer ml-1 mr-3">
-                      {/* ⌕ */}
+                      ⌕
                     </span>
                   </>
                 ) : (
@@ -94,7 +94,7 @@ const Header = () => {
               />
             </div>
             <div onClick={handleProfileConfigToggle}>
-              {profileConfig ? (
+              {!profileConfig ? (
                 <p className="text-white text-xl cursor-pointer transition-transform duration-300 ease-in-out transform rotate-90">
                   ⏵
                 </p>
@@ -104,7 +104,7 @@ const Header = () => {
                 </p>
               )}
             </div>
-            {profileConfig ? null : <ProfileConfig />}
+            {profileConfig ? <ProfileConfig /> : null}
           </div>
         </div>
       </div>

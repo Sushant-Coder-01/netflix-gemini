@@ -31,7 +31,10 @@
     - Use TMDB CDN_URL ( Image )
     - Build Home Page Amazing using Tailwind CSS
     - Build custom hooks for movie lists
-    - GPT Search Feature
+    - GPT Search Page
+    - GPT Search Bar
+    - (*) Multi-language Feature in our App
+    - 
 
 ## Project-Plan
 

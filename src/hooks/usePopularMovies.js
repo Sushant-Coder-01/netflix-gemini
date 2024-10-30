@@ -12,7 +12,6 @@ const usePopularMovies = () => {
       GET_OPTIONS
     );
     const data = await response.json();
-    console.log(data);
 
     dispatch(addPopularMovies(data.results));
   };

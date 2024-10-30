@@ -12,7 +12,6 @@ const useUpcomingMovies = () => {
       GET_OPTIONS
     );
     const data = await response.json();
-    console.log(data);
 
     dispatch(addUpcomingMovies(data.results));
   };

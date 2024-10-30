@@ -4,12 +4,13 @@ import BannerContent from "./BannerContent";
 
 const HeroBanner = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
-  if(!movies) return;
+  if (!movies) return;
 
-  const BannerMovie = movies[18];
+  const BannerMovie = movies[Math.floor(Math.random() * movies.length)];
 
-  const {original_title, overview, id} = BannerMovie;
-  
+
+  const { original_title, overview, id } = BannerMovie;
+
   return (
     <div className="h-screen">
       <BannerMedia movieId={id} />
