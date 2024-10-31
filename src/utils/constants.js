@@ -13,7 +13,8 @@ export const GET_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: "Bearer " + process.env.REACT_APP_BEARER_TOKEN,
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODU2MzNlOGQ4ODdmN2FlYjk4NjFmYzdiMzNjNzk4MCIsIm5iZiI6MTczMDA5NDAyNS4xMjA4ODksInN1YiI6IjY3MWYyMjRiMjdiZDU3ZDkxZjYzMWFkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BoMRpkBrLu0cmfQLRLvIHD7mosz2Zcsq9d_w8hW_6SA",
   },
 };
 
