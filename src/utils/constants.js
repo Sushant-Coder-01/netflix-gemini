@@ -13,7 +13,7 @@ export const GET_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: process.env.REACT_APP_BEARER_TOKEN,
+    Authorization: "Bearer " + process.env.REACT_APP_BEARER_TOKEN,
   },
 };
 
