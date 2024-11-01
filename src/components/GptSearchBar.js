@@ -30,11 +30,16 @@ const GptSearchBar = () => {
     dispatch(clearRecommandedMovies());
     dispatch(clearSearchMoviesInTMDB());
     dispatch(toggleSearchBtn(true));
-    const gptQuery = `You are a 'Movie Recommendation System'. Based on the user's interest in: "${promptValue}",  When a user mentions any movie, if they ask for recommendations, provide exactly 5 similar movies. However, if they ask for a movie similar to a specific title (e.g., "I like Tumbbad"), provide exactly movie that is similar to that specific title in a comma-separated format. Do not include any additional text or explanations.`;
+
+    const gptQuery = `
+    You are a "Movie Recommendation System". Based on the user's interest in: "${promptValue}", respond as follows:
+    1. If the user asks for recommendations (e.g., "Give me movie recommendations" or "What are some movies like this?"), respond with exactly 5 movies in a comma-separated format that align with the user's interest or the genre/style of the mentioned movie.
+    2. If the user mentions a specific movie and asks for something similar (e.g., "I liked Tumbbad" or "Recommend a movie like Tumbbad"), respond with exactly 1 movie that closely matches the theme, style, or genre of that specific title.
+    Do not include any additional text, explanations, or formatting beyond the comma-separated movie titles.`;
 
     try {
       const completion = await client.chat.completions.create({
-        model: "nousresearch/hermes-3-llama-3.1-405b:free",
+        model: "google/gemma-2-9b-it:free",
         messages: [
           {
             role: "user",
@@ -49,6 +54,8 @@ const GptSearchBar = () => {
         .split(",")
         .map((movie) => movie.trim())
         .filter((movie) => movie.length > 0);
+
+      console.log(cleanedMovies);
 
       dispatch(addRecommandedMovies(cleanedMovies));
     } catch (error) {
