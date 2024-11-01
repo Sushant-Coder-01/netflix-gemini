@@ -6,6 +6,8 @@ import { useEffect } from "react";
 const useMovieVideo = (movieId) => {
   const dispatch = useDispatch();
 
+  const movieTrailer = useSelector((store) => store.movies.movieTrailer);
+
   const getMovieVideos = async () => {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/" +
@@ -26,12 +28,11 @@ const useMovieVideo = (movieId) => {
 
   useEffect(() => {
     if (movieId) {
-      getMovieVideos();
+      !movieTrailer && getMovieVideos();
     }
   }, []);
 
   const trailerVideo = useSelector((store) => store.movies?.movieTrailer);
-  console.log(trailerVideo);
   return trailerVideo;
 };
 

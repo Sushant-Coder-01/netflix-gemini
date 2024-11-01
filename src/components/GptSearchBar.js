@@ -1,31 +1,85 @@
-import { useSelector } from "react-redux";
-import { LOGIN_BACKGROUND_IMAGE } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../utils/languageConstants";
+import { useRef } from "react";
+import client from "../utils/openai";
+import {
+  addRecommandedMovies,
+  clearRecommandedMovies,
+  clearSearchMoviesInTMDB,
+  setGptPrompt,
+} from "../redux/gptSlice";
+import { toggleSearchBtn } from "../redux/configSlice";
 
 const GptSearchBar = () => {
-
+  const gptPrompt = useRef(null);
+  const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
+  const storedGptPrompt = useSelector((store) => store.gpt.gptPrompt);
+
+  const handleInputChange = (event) => {
+    dispatch(setGptPrompt(event.target.value));
+  };
+
+  const handleGptSearchClick = async () => {
+    const promptValue = storedGptPrompt.trim();
+    if (!promptValue) {
+      alert("Please enter a valid movie interest.");
+      return;
+    }
+
+    dispatch(clearRecommandedMovies());
+    dispatch(clearSearchMoviesInTMDB());
+    dispatch(toggleSearchBtn(true));
+    const gptQuery = `You are a 'Movie Recommendation System'. Based on the user's interest in: "${promptValue}",  When a user mentions any movie, if they ask for recommendations, provide exactly 5 similar movies. However, if they ask for a movie similar to a specific title (e.g., "I like Tumbbad"), provide exactly movie that is similar to that specific title in a comma-separated format. Do not include any additional text or explanations.`;
+
+    try {
+      const completion = await client.chat.completions.create({
+        model: "nousresearch/hermes-3-llama-3.1-405b:free",
+        messages: [
+          {
+            role: "user",
+            content: gptQuery,
+          },
+        ],
+      });
+
+      const gptRecommendedMovies =
+        completion.choices[0]?.message?.content?.trim() || "";
+      const cleanedMovies = gptRecommendedMovies
+        .split(",")
+        .map((movie) => movie.trim())
+        .filter((movie) => movie.length > 0);
+
+      dispatch(addRecommandedMovies(cleanedMovies));
+    } catch (error) {
+      console.error("Error fetching movie recommendations:", error);
+      alert("Failed to fetch movie recommendations. Please try again.");
+    } finally {
+      dispatch(toggleSearchBtn(false));
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") handleGptSearchClick();
+  };
 
   return (
-    <div>
-      <div className="absolute w-full h-full overflow-hidden">
-        <div className="absolute w-full h-full bg-black/60 z-10"></div>
-        <img
-          className="absolute inset-0 w-full h-full object-cover blur-sm"
-          alt="background-img"
-          src={LOGIN_BACKGROUND_IMAGE}
+    <div className="absolute top-28 left-1/2 transform -translate-x-1/2 w-3/4 sm:w-4/6 md:w-5/6 lg:w-4/6 xl:w-7/12 2xl:w-5/12 z-10">
+      <div className="flex items-center bg-gray-800/80 bg-gradient-to-t from-white/10 px-1 rounded-lg border-2 border-red-600 shadow-lg">
+        <input
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          ref={gptPrompt}
+          className="bg-transparent text-white w-full h-12 text-xl px-4 placeholder-white/50 focus:outline-none"
+          placeholder={lang[langKey].gptSearchPlaceholder}
+          value={storedGptPrompt}
         />
-      </div>
-      <div className="absolute top-28 left-1/2 transform -translate-x-1/2 z-20 w-5/12">
-        <div className="flex items-center bg-gray-800/80 bg-gradient-to-t from-white/10 px-1 rounded-lg border-2 border-red-600 shadow-lg">
-          <input
-            className="bg-transparent text-white w-full h-12 text-xl px-4 placeholder-white/50 focus:outline-none"
-            placeholder={lang[langKey].gptSearchPlaceholder}
-          />
-          <p className="text-3xl text-gray-300 cursor-pointer px-4 hover:text-white">
-            ⌕
-          </p>
-        </div>
+        <p
+          className="text-3xl text-gray-300 cursor-pointer px-4 hover:text-white"
+          onClick={handleGptSearchClick}
+        >
+          ⌕
+        </p>
       </div>
     </div>
   );

@@ -6,6 +6,8 @@ import { GET_OPTIONS } from "../utils/constants";
 const useMovieImage = (movieId) => {
   const dispatch = useDispatch();
 
+  const moviesLogo = useSelector(store => store.movies.moviesLogo);
+
   const fetchMovieImage = async () => {
     try {
       const response = await fetch(
@@ -23,7 +25,7 @@ const useMovieImage = (movieId) => {
 
   useEffect(() => {
     if (movieId) {
-      fetchMovieImage();
+      !moviesLogo && fetchMovieImage();
     }
   }, []);
 

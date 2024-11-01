@@ -213,7 +213,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="p-2 my-4 mx-4 rounded-md bg-red-700"
+            className="p-2 my-4 mx-4 rounded-md bg-red-700 active:bg-red-600 transition-transform duration-150 ease-in-out transform active:scale-95"
             onClick={handleButtonClick}
           >
             {isSignIn ? "Sign In" : "Sign Up"}

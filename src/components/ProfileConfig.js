@@ -18,26 +18,32 @@ const ProfileConfig = () => {
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
+
   return (
-    <div className="absolute w-[160px] h-44 px-5 py-6 top-16 right-9 rounded-sm bg-gray-400/80 bg-gradient-to-t from-black/70">
-      <div className="flex flex-col items-start space-y-3">
+    <div className="absolute w-40 sm:w-48 md:w-52 px-4 py-4 top-16 right-4 md:right-8 rounded-md bg-gray-700 bg-gradient-to-t from-black/70 shadow-lg">
+      <div className="flex flex-col space-y-3">
+        {/* Language Selection */}
         <div>
           <select
-            className="text-white px-2 py-1 rounded-sm bg-gray-800 p-2 border border-red-700 focus:outline-none cursor-pointer"
-            onClick={handleLanguageChange}
+            className="w-full text-white px-2 py-1 rounded-md bg-gray-800 border border-red-700 focus:outline-none cursor-pointer text-xs sm:text-sm md:text-base"
+            onChange={handleLanguageChange}
           >
-            {SUPPORTED_LANGUAGES.map((lang) => (
-              <option key={lang.identifier} value={lang.identifier}>
-                {lang.name}
+            {SUPPORTED_LANGUAGES.map((language) => (
+              <option key={language.identifier} value={language.identifier}>
+                {language.name}
               </option>
             ))}
           </select>
         </div>
-        <button className="hidden sm:inline-block text-white text-sm md:text-base lg:text-lg">
+
+        {/* Profile Settings Button */}
+        <button className=" sm:inline-block text-white text-xs sm:text-sm md:text-base lg:text-lg">
           {lang[langKey].profileSettings}
         </button>
+
+        {/* Logout Button */}
         <button
-          className="hidden sm:inline-block text-white text-sm md:text-base lg:text-lg"
+          className="text-white text-xs sm:text-sm md:text-base lg:text-lg"
           onClick={handleLogoutBtn}
         >
           {lang[langKey].logout}

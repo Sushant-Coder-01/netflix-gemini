@@ -11,7 +11,7 @@ import GptSearchPage from "./GptSearchPage";
 
 const Browse = () => {
   const gptSearchToggleBtn = useSelector(
-    (store) => store.gptSearchToggle.gptSearchToggleBtn
+    (store) => store.gpt.gptSearchToggleBtn
   );
 
   useNowPlayingMovies();

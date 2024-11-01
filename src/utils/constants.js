@@ -13,8 +13,7 @@ export const GET_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODU2MzNlOGQ4ODdmN2FlYjk4NjFmYzdiMzNjNzk4MCIsIm5iZiI6MTczMDA5NDAyNS4xMjA4ODksInN1YiI6IjY3MWYyMjRiMjdiZDU3ZDkxZjYzMWFkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BoMRpkBrLu0cmfQLRLvIHD7mosz2Zcsq9d_w8hW_6SA",
+    Authorization: "Bearer " + process.env.REACT_APP_BEARER_TOKEN,
   },
 };
 
@@ -33,3 +32,8 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "korean", name: "Korean" },
   { identifier: "japanese", name: "Japanese" },
 ];
+
+export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
+export const OPENROUTER_API_KEY = process.env.REACT_APP_OPENROUTER_API_KEY;
+export const OPENROUTER_API_KEY_1 = process.env.REACT_APP_OPENROUTER_API_KEY_1;
+export const OPENROUTER_API_KEY_2 = process.env.REACT_APP_OPENROUTER_API_KEY_2;
