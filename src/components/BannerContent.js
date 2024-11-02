@@ -15,8 +15,8 @@ const BannerContent = ({ title, overview, movieId }) => {
   };
 
   return (
-    <div className="absolute inset-0 bg-gradient-to-r from-black/70  md:aspect-video overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-black w-full overflow-hidden">
+    <div className="absolute inset-0 md:bg-gradient-to-r md:from-black/70  md:aspect-video overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-t from-black md:bg-gradient-to-t md:from-black w-full overflow-hidden">
         <div
           className={
             " pl-8 md:pl-12 w-screen flex flex-col transition-all duration-300"
