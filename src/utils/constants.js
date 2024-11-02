@@ -22,6 +22,9 @@ export const IMG_CDN = "https://image.tmdb.org/t/p/w500/";
 export const HOME_ICON =
   "https://img.icons8.com/material-outlined/24/FFFFFF/home-page.png";
 
+export const PLAY_ICON =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB9ElEQVR4nO2bPYsTURSGjyJqoSKJSe7znuA0wY8RtLAStLIQsfIPCFrYivoHBC0stbHX0s5WYYWtt7EVUdDCYkUbUVTckSEJExYFXQkkc+4DbzXVebjD3HvuGbNMJpPJZDJbodPp7HP34ymlo2VZ7rQopJR6wEPgq6SqDvARuNPtdvdam3H3IfBuWvjm1M+Ai9ZWgGd/Kn6TiCfAQWsTg8Hg2N8UP5PPkm6a2Q5rA+5+6R8FTFfDC0mnbNlx9+tbETDJT+BBURT7bVmRdOM/BEzzvl5JFlhANXktngNHLKoAjSV8AW6NRqNdFlGAGhEvJZ21qAI0zoakR/Uu04IKqGa21FfNbJtFFKAmqyml0gILqIDvku4WRbHbIgpQI+IVcC6sADUiHvf7/UFYARpL+ARcM7PtIQWoyRpwMrKAStIPSfd7vd6eqAKqSV4DZyILqIBv7n4hrACNsz7XpqwWX0CdK9EF3MsCgq+Ay5EFrM91T6AF/wymlM7PrfgFF/AGOG3zRosnIPRWeC3kYYjIx2GiNkSI2hIjeFN0NWRbnMAXIxthr8aIejlK5OtxYEXSYVsmFH1ExqMPSXn0MbmUUhl6ULJG0tOwo7I1w+HQgbdhh6VrgAO/GZf/ANxu/bj8LHUryt1PSDoU6oeJTCaTyWSsFfwC9tdwrkzSdkgAAAAASUVORK5CYII=";
+
 export const SUPPORTED_LANGUAGES = [
   { identifier: "en", name: "English" },
   { identifier: "hindi", name: "हिंदी" },

@@ -1,6 +1,5 @@
 import notificationIcon from "../assets/icons/notification-icon.jpg";
 import profileIcon from "../assets/icons/netflix-profile-icon.png";
-
 import { BELL_ICON, HOME_ICON, NETFLIX_LOGO } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { changeGptSearchToggle } from "../redux/gptSlice";
@@ -68,7 +67,7 @@ const Header = () => {
                 </>
               ) : (
                 <img
-                  className="w-4 h-5 md:w-5 md:h-5 text-white"
+                  className="w-6 h-7 md:w-5 md:h-5 text-white"
                   alt="home-icon"
                   src={HOME_ICON}
                 />
@@ -76,13 +75,13 @@ const Header = () => {
             </button>
 
             <img
-              className="w-5 sm:w-6 md:w-7 cursor-pointer"
+              className="hidden md:inline-block  w-5 sm:w-6 md:w-7 cursor-pointer"
               src={BELL_ICON || notificationIcon}
               alt="notification-icon"
             />
 
             <img
-              className="w-5 sm:w-6 md:w-8 rounded-sm cursor-pointer"
+              className="w-8 sm:w-8 md:w-8 rounded-sm cursor-pointer"
               src={profileIcon}
               alt="netflix-profile-icon"
               onClick={handleProfileConfigToggle}
@@ -90,7 +89,7 @@ const Header = () => {
 
             <div onClick={handleProfileConfigToggle}>
               <p
-                className={`text-white text-lg sm:text-xl cursor-pointer transition-transform duration-300 ease-in-out ${
+                className={`hidden md:block text-white text-lg sm:text-xl cursor-pointer transition-transform duration-300 ease-in-out ${
                   profileConfig ? "-rotate-90" : "rotate-90"
                 }`}
               >

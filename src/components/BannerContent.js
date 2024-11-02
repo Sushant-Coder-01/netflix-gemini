@@ -3,6 +3,7 @@ import useMovieImage from "../hooks/useMovieImage";
 import { useSelector } from "react-redux";
 import { lang } from "../utils/languageConstants";
 import MovieOverview from "./MovieOverview";
+import { PLAY_ICON } from "../utils/constants";
 
 const BannerContent = ({ title, overview, movieId }) => {
   const [showOverview, setShowOverview] = useState(false);
@@ -60,8 +61,11 @@ const BannerContent = ({ title, overview, movieId }) => {
         </div>
         {/* Buttons Section */}
         <div className="flex gap-4 pl-16 md:pl-12">
-          <div className="flex items-center px-2 py-1 md:px-8 md:py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70 cursor-pointer">
-            <p className="rounded-sm text-md md:text-2xl">⏵ {lang[langKey].playBtn}</p>
+          <div className="flex space-x-1 items-center px-2 py-1 md:px-8 md:py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70 cursor-pointer">
+            <img className="w-5 md:w-8" src={PLAY_ICON} alt="play" />
+            <p className="rounded-sm text-md md:text-2xl">
+              {lang[langKey].playBtn}
+            </p>
           </div>
 
           <div
