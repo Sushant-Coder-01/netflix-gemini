@@ -26,14 +26,14 @@ const Header = () => {
 
   return (
     <div className="absolute z-30 w-full">
-      <div className="w-full bg-black bg-gradient-to-t from-white/30 md:bg-transparent h-12 sm:h-12 md:h-20 lg:h-16 md:bg-gradient-to-b md:from-black fixed">
-        <div className="flex justify-between items-center px-4 py-1 md:py-0 sm:px-6 lg:px-8">
+      <div className="w-full bg-black bg-gradient-to-t from-white/30 md:bg-transparent h-16 sm:h-12 md:h-20 lg:h-16 md:bg-gradient-to-b md:from-black fixed">
+        <div className="flex justify-between items-center px-2 py-2 md:py-0 sm:px-6 lg:px-8">
           {/* Left Section - Logo and Navigation Links */}
           <div className="flex items-center gap-2">
             {/* Logo */}
             <div>
               <img
-                className="w-24 sm:w-28 md:w-36 lg:w-40"
+                className="w-32 sm:w-28 md:w-36 lg:w-40"
                 alt="netflix-logo"
                 src={NETFLIX_LOGO}
               />
