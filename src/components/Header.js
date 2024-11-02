@@ -26,8 +26,8 @@ const Header = () => {
 
   return (
     <div className="absolute z-30 w-full">
-      <div className="w-full h-16 sm:h-12 md:h-20 lg:h-16 bg-gradient-to-b from-black fixed">
-        <div className="flex justify-between items-center px-4 sm:px-6 lg:px-8">
+      <div className="w-full bg-black bg-gradient-to-t from-white/30 md:bg-transparent h-12 sm:h-12 md:h-20 lg:h-16 md:bg-gradient-to-b md:from-black fixed">
+        <div className="flex justify-between items-center px-4 py-1 md:py-0 sm:px-6 lg:px-8">
           {/* Left Section - Logo and Navigation Links */}
           <div className="flex items-center gap-2">
             {/* Logo */}
@@ -54,7 +54,7 @@ const Header = () => {
           {/* Right Section - Icons and Logout */}
           <div className="flex items-center gap-2 sm:gap-3">
             <button
-              className="flex items-center bg-gray-800/50 p-1 rounded-lg border-2 border-red-600"
+              className="flex items-center bg-gray-800/50 px-1 md:p-1 rounded-lg border-2 border-red-600"
               onClick={handleGptSearchToggleBtn}
             >
               {!gptSearchToggle ? (
@@ -68,7 +68,7 @@ const Header = () => {
                 </>
               ) : (
                 <img
-                  className="w-5 h-5 text-white"
+                  className="w-4 h-5 md:w-5 md:h-5 text-white"
                   alt="home-icon"
                   src={HOME_ICON}
                 />
