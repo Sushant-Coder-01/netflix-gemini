@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import useMovieImage from "../hooks/useMovieImage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../utils/languageConstants";
 import MovieOverview from "./MovieOverview";
 import { PLAY_ICON } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
+import { clearBannerMovie } from "../redux/moviesSlice";
 
 const BannerContent = ({ title, overview, movieId }) => {
   const [showOverview, setShowOverview] = useState(false);
   const filePath = useMovieImage(movieId);
   const langKey = useSelector((store) => store.config.lang);
+  const bannerMovie = useSelector((store) => store.movies.bannerMovie);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleMoreInfoClick = () => {
     setShowOverview((prev) => !prev);
+  };
+
+  const handlePlayButtonClick = () => {
+    if (bannerMovie?.id) {
+      navigate(`/browse/trailer/${bannerMovie?.id}`);
+      dispatch(clearBannerMovie());
+    } else {
+      console.error("Movie ID is not defined");
+    }
   };
 
   return (
@@ -61,7 +75,10 @@ const BannerContent = ({ title, overview, movieId }) => {
         </div>
         {/* Buttons Section */}
         <div className="flex gap-4 pl-16 md:pl-12">
-          <div className="flex space-x-1 items-center px-2 py-1 md:px-8 md:py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70 cursor-pointer">
+          <div
+            className="flex space-x-1 items-center px-2 py-1 md:px-8 md:py-2 bg-white text-black font-semibold rounded-sm hover:opacity-70 cursor-pointer"
+            onClick={handlePlayButtonClick}
+          >
             <img className="w-5 md:w-8" src={PLAY_ICON} alt="play" />
             <p className="rounded-sm text-md md:text-2xl">
               {lang[langKey].playBtn}

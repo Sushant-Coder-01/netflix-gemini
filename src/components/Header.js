@@ -1,27 +1,36 @@
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import notificationIcon from "../assets/icons/notification-icon.jpg";
 import profileIcon from "../assets/icons/netflix-profile-icon.png";
 import { BELL_ICON, HOME_ICON, NETFLIX_LOGO } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { changeGptSearchToggle } from "../redux/gptSlice";
 import { lang } from "../utils/languageConstants";
-import { useState } from "react";
 import ProfileConfig from "./ProfileConfig";
 
 const Header = () => {
   const [profileConfig, setProfileConfig] = useState(false);
+  const [isOnGptSearchPage, setIsOnGptSearchPage] = useState(false);
 
-  const dispatch = useDispatch();
-  const gptSearchToggle = useSelector((store) => store.gpt.gptSearchToggleBtn);
+  const langKey = useSelector((store) => store.config.lang);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleGptSearchToggleBtn = () => {
-    dispatch(changeGptSearchToggle());
-  };
+  useEffect(() => {
+    // Set the state based on the current location
+    setIsOnGptSearchPage(location.pathname === "/browse/gpt-search-page");
+  }, [location.pathname]);
 
   const handleProfileConfigToggle = () => {
     setProfileConfig(!profileConfig);
   };
 
-  const langKey = useSelector((store) => store.config.lang);
+  const handleNavigation = (route) => {
+    navigate(route);
+  };
+
+  const handleToggleSearchPage = () => {
+    handleNavigation(isOnGptSearchPage ? "/browse" : "/browse/gpt-search-page");
+  };
 
   return (
     <div className="absolute z-30 w-full">
@@ -40,7 +49,12 @@ const Header = () => {
 
             {/* Navigation Links */}
             <div className="hidden lg:flex gap-5 text-white font-semibold text-sm md:text-base">
-              <p className="cursor-pointer">{lang[langKey].navHomeBtn}</p>
+              <p
+                className="cursor-pointer"
+                onClick={() => handleNavigation("/browse")}
+              >
+                {lang[langKey].navHomeBtn}
+              </p>
               <p className="cursor-pointer">{lang[langKey].navTvShowBtn}</p>
               <p className="cursor-pointer">{lang[langKey].navMoviesBtn}</p>
               <p className="cursor-pointer">
@@ -54,28 +68,24 @@ const Header = () => {
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               className="flex items-center bg-gray-800/50 px-1 md:p-1 rounded-lg border-2 border-red-600"
-              onClick={handleGptSearchToggleBtn}
+              onClick={handleToggleSearchPage}
             >
-              {!gptSearchToggle ? (
-                <>
-                  <p className="text-xs sm:text-sm text-white cursor-pointer ml-2 mr-2">
-                    {lang[langKey].gptSearchBtnPlaceholder}
-                  </p>
-                  <span className="text-xl text-white cursor-pointer ml-1 mr-3">
-                    ⌕
-                  </span>
-                </>
-              ) : (
-                <img
-                  className="w-6 h-7 md:w-5 md:h-5 text-white"
-                  alt="home-icon"
-                  src={HOME_ICON}
-                />
-              )}
+              <p className="text-xs sm:text-sm text-white cursor-pointer ml-2 mr-2">
+                {isOnGptSearchPage
+                  ? lang[langKey].navHomeBtn
+                  : lang[langKey].gptSearchBtnPlaceholder}{" "}
+              </p>
+              <span className="text-xl text-white cursor-pointer ml-1 mr-3">
+                {isOnGptSearchPage ? (
+                  <img alt="home-icon" src={HOME_ICON} />
+                ) : (
+                  "⌕"
+                )}
+              </span>
             </button>
 
             <img
-              className="hidden md:inline-block  w-5 sm:w-6 md:w-7 cursor-pointer"
+              className="hidden md:inline-block w-5 sm:w-6 md:w-7 cursor-pointer"
               src={BELL_ICON || notificationIcon}
               alt="notification-icon"
             />

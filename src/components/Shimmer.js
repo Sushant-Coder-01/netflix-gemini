@@ -40,16 +40,74 @@ export const MovieSuggestionsShimmer = () => {
       <div className="w-36 sm:w-56 h-5 bg-gray-300 shadow-lg mb-2 rounded"></div>
       <div className="flex gap-4 overflow-x-scroll">
         {/* Repeat the shimmer blocks for the number of movie cards you want to display */}
-        {Array.from({ length: window.innerWidth < 768 ?  3 : 7 }).map((_, index) => (
-          <div
-            key={index}
-            className="w-48 sm:w-56 md:w-72 h-48 sm:h-80 bg-gray-300 rounded-md shadow-lg relative"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 opacity-20 rounded-md"></div>
-            <div className="h-24 sm:h-32 bg-gray-400 rounded-t-md"></div> {/* Simulate poster */}
-            <div className="h-4 sm:h-6 bg-gray-400 mt-2 mx-2 rounded"></div> {/* Movie title */}
-            <div className="h-2 sm:h-4 bg-gray-400 mt-1 mx-2 rounded w-3/4"></div> {/* Additional details */}
-          </div>
+        {Array.from({ length: window.innerWidth < 768 ? 3 : 7 }).map(
+          (_, index) => (
+            <div
+              key={index}
+              className="w-48 sm:w-56 md:w-72 h-48 sm:h-80 bg-gray-300 rounded-md shadow-lg relative"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 opacity-20 rounded-md"></div>
+              <div className="h-24 sm:h-32 bg-gray-400 rounded-t-md"></div>{" "}
+              {/* Simulate poster */}
+              <div className="h-4 sm:h-6 bg-gray-400 mt-2 mx-2 rounded"></div>{" "}
+              {/* Movie title */}
+              <div className="h-2 sm:h-4 bg-gray-400 mt-1 mx-2 rounded w-3/4"></div>{" "}
+              {/* Additional details */}
+            </div>
+          )
+        )}
+      </div>
+    </div>
+  );
+};
+
+// ShimmerPlaceholder.js
+export const CarouselShimmer = () => {
+  // Placeholder colors to match the dark theme
+  const shimmerColors = [
+    "bg-gray-800",
+    "bg-gray-700",
+    "bg-gray-600",
+    "bg-gray-500",
+    "bg-gray-400",
+  ];
+
+  return (
+    <div className="relative flex flex-col items-center justify-center w-full space-y-20 animate-pulse">
+      {/* Carousel Shimmer Container */}
+      <div className="flex items-center space-x-24 overflow-hidden">
+        {/* Left Arrow Placeholder */}
+        <div className="text-5xl text-gray-700"> &#10094; </div>
+
+        {/* Shimmer Carousel Items */}
+        <div className="flex items-center space-x-4">
+          {[...Array(5)].map((_, index) => (
+            <div
+              key={index}
+              className={`rounded-lg shadow-lg ${
+                index === 2
+                  ? "w-56 h-72" // Focused item dimensions
+                  : "w-9 h-56" // Pipe-like dimensions for other items
+              } ${shimmerColors[index % shimmerColors.length]} p-4`}
+            >
+              {index === 2 && (
+                <div>
+                  <div className="h-6 w-3/4 bg-gray-500 rounded mb-2"></div>
+                  <div className="h-4 w-1/2 bg-gray-500 rounded"></div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Right Arrow Placeholder */}
+        <div className="text-5xl text-gray-700"> &#10095; </div>
+      </div>
+
+      {/* Dot Placeholder */}
+      <div className="flex space-x-2">
+        {[...Array(5)].map((_, index) => (
+          <span key={index} className="w-3 h-3 bg-gray-500 rounded-full" />
         ))}
       </div>
     </div>

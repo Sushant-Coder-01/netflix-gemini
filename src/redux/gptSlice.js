@@ -1,17 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const gptSearchToggleView = createSlice({
+const gptSearch = createSlice({
   name: "gpt",
   initialState: {
-    gptSearchToggleBtn: false,
     searchMoviesInTMDB: null,
     gptRecommandedMovies: null,
     gptPrompt: "",
+    gptReasonsToWatch: null,
   },
   reducers: {
-    changeGptSearchToggle: (state) => {
-      state.gptSearchToggleBtn = !state.gptSearchToggleBtn;
-    },
     addSearchMoviesInTMDB: (state, action) => {
       state.searchMoviesInTMDB = action.payload;
     },
@@ -29,10 +26,25 @@ const gptSearchToggleView = createSlice({
     },
     clearRecommandedMovies: (state) => {
       state.gptRecommandedMovies = [];
-    }
+    },
+    addReasonsToWatch: (state, action) => {
+      state.gptReasonsToWatch = action.payload;
+    },
+    clearReasonsToWatch: (state) => {
+      state.gptReasonsToWatch = [];
+    },
   },
 });
 
-export const { changeGptSearchToggle, addSearchMoviesInTMDB, addRecommandedMovies, addGptPrompt, setGptPrompt, clearRecommandedMovies , clearSearchMoviesInTMDB } = gptSearchToggleView.actions;
+export const {
+  addSearchMoviesInTMDB,
+  addRecommandedMovies,
+  addGptPrompt,
+  setGptPrompt,
+  clearRecommandedMovies,
+  clearSearchMoviesInTMDB,
+  addReasonsToWatch,
+  clearReasonsToWatch,
+} = gptSearch.actions;
 
-export default gptSearchToggleView.reducer;
+export default gptSearch.reducer;

@@ -9,6 +9,7 @@ import {
   setGptPrompt,
 } from "../redux/gptSlice";
 import { toggleSearchBtn } from "../redux/configSlice";
+import { MODEL_NAME } from "../utils/constants";
 
 const GptSearchBar = () => {
   const gptPrompt = useRef(null);
@@ -32,14 +33,18 @@ const GptSearchBar = () => {
     dispatch(toggleSearchBtn(true));
 
     const gptQuery = `
-    You are a "Movie Recommendation System". Based on the user's interest in: "${promptValue}", respond as follows:
-    1. If the user asks for recommendations (e.g., "Give me movie recommendations" or "What are some movies like this?"), respond with exactly 5 movies in a comma-separated format that align with the user's interest or the genre/style of the mentioned movie.
-    2. If the user mentions a specific movie and asks for something similar (e.g., "I liked Tumbbad" or "Recommend a movie like Tumbbad"), respond with exactly 1 movie that closely matches the theme, style, or genre of that specific title.
-    Do not include any additional text, explanations, or formatting beyond the comma-separated movie titles.`;
+    You are a "Movie Recommendation System". Based on the user's interest in comedy Indian movies, please provide a list of exactly 5 movies, adhering to these categories:
+    
+    1. Top-rated or highly acclaimed
+    2. Recent or trending
+    3. Popular
+    4. Classic or older but best-quality
+  
+    Respond with only the names of the movies, separated by commas, and without any additional text, numbers, or formatting artifacts. Please provide the movie names in the following format: "Movie1, Movie2, Movie3, Movie4, Movie5".`;
 
     try {
       const completion = await client.chat.completions.create({
-        model: "google/gemma-2-9b-it:free",
+        model: MODEL_NAME,
         messages: [
           {
             role: "user",
@@ -50,12 +55,11 @@ const GptSearchBar = () => {
 
       const gptRecommendedMovies =
         completion.choices[0]?.message?.content?.trim() || "";
+
       const cleanedMovies = gptRecommendedMovies
         .split(",")
         .map((movie) => movie.trim())
         .filter((movie) => movie.length > 0);
-
-      console.log(cleanedMovies);
 
       dispatch(addRecommandedMovies(cleanedMovies));
     } catch (error) {

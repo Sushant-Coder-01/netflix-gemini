@@ -37,6 +37,16 @@ export const SUPPORTED_LANGUAGES = [
 ];
 
 export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
-export const OPENROUTER_API_KEY = process.env.REACT_APP_OPENROUTER_API_KEY;
-export const OPENROUTER_API_KEY_1 = process.env.REACT_APP_OPENROUTER_API_KEY_1;
-export const OPENROUTER_API_KEY_2 = process.env.REACT_APP_OPENROUTER_API_KEY_2;
+
+export const OPENROUTER_MISTRAL_7B_Instruct =
+  process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT; // mistralai/mistral-7b-instruct:free (45)
+
+export const OPENROUTER_HERMES_3_LLAMA =
+  process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA; // nousresearch/hermes-3-llama-3.1-405b:free (318)
+
+export const OPENROUTER_GOOGLE_GEMMA_2_9B =
+  process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B; // google/gemma-2-9b-it:free (318)
+
+export const MODEL_NAME = "google/gemma-2-9b-it:free";
+
+export const MODEL_API_KEY = process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B;
