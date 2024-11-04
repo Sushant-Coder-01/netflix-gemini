@@ -20,8 +20,8 @@ const BannerContent = ({ title, overview, movieId }) => {
   };
 
   const handlePlayButtonClick = () => {
-    if (bannerMovie?.id) {
-      navigate(`/browse/trailer/${bannerMovie?.id}`);
+    if (bannerMovie) {
+      navigate(`/browse/trailer/${bannerMovie}`);
       dispatch(clearBannerMovie());
     } else {
       console.error("Movie ID is not defined");

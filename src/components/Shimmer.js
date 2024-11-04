@@ -40,7 +40,7 @@ export const MovieSuggestionsShimmer = () => {
       <div className="w-36 sm:w-56 h-5 bg-gray-300 shadow-lg mb-2 rounded"></div>
       <div className="flex gap-4 overflow-x-scroll">
         {/* Repeat the shimmer blocks for the number of movie cards you want to display */}
-        {Array.from({ length: window.innerWidth < 768 ? 3 : 7 }).map(
+        {Array.from({ length: window.innerWidth < 768 ? 3 : 7 })?.map(
           (_, index) => (
             <div
               key={index}
@@ -81,7 +81,7 @@ export const CarouselShimmer = () => {
 
         {/* Shimmer Carousel Items */}
         <div className="flex items-center space-x-4">
-          {[...Array(5)].map((_, index) => (
+          {[...Array(5)]?.map((_, index) => (
             <div
               key={index}
               className={`rounded-lg shadow-lg ${
@@ -106,7 +106,7 @@ export const CarouselShimmer = () => {
 
       {/* Dot Placeholder */}
       <div className="flex space-x-2">
-        {[...Array(5)].map((_, index) => (
+        {[...Array(5)]?.map((_, index) => (
           <span key={index} className="w-3 h-3 bg-gray-500 rounded-full" />
         ))}
       </div>

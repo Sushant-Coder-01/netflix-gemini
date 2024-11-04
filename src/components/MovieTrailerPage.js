@@ -21,7 +21,7 @@ const MovieTrailerPage = () => {
   const movieDetails = useSelector((store) => store.movies.movieDetails);
 
   // useGptRecommendationReasons(movieDetails?.title);
-  const gptReasonsToWatch = useSelector((store) => store.gpt.gptReasonsToWatch);
+  const gptReasonsToWatch = useGptRecommendationReasons(movieDetails?.title);
 
   if (!movieDetails) return null; // Make sure to return null or a loading state while fetching
 
@@ -105,7 +105,7 @@ const MovieTrailerPage = () => {
                   Why You Should Watch It?
                 </h1>
                 <div className="flex flex-col justify-between h-auto">
-                  {gptReasonsToWatch ? (
+                  { gptReasonsToWatch ? (
                     <Carousel items={gptReasonsToWatch} />
                   ) : (
                     <CarouselShimmer />

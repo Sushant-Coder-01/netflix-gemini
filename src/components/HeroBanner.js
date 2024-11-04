@@ -1,20 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
 import BannerMedia from "./BannerMedia";
 import BannerContent from "./BannerContent";
-import { addBannerMovie } from "../redux/moviesSlice";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 
 const HeroBanner = () => {
-  const dispatch = useDispatch();
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
-  if (!movies) return;
 
-  const BannerMovie = movies[Math.floor(Math.random() * movies.length)];
+  const [bannerMovie, setBannerMovie] = useState(null);
 
+  useEffect(() => {
+    if (movies && movies.length > 0) {
+      const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+      setBannerMovie(randomMovie);
+    }
+  }, [movies]);
 
-  const { original_title, overview, id } = BannerMovie;
+  if (!bannerMovie) return null;
 
-  dispatch(addBannerMovie(BannerMovie));
-
+  const { original_title, overview, id } = bannerMovie;
 
   return (
     <div className="md:h-screen pt-16 md:pt-0">

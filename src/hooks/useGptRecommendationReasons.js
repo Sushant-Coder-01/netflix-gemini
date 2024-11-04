@@ -6,7 +6,7 @@ import { MODEL_NAME } from "../utils/constants";
 
 const useGptRecommendationReasons = (movieName) => {
   const dispatch = useDispatch();
-  const movieDetails = useSelector((state) => state.gpt.movieDetails);
+  const gptReasonsToWatch = useSelector((state) => state.gpt.gptReasonsToWatch);
 
   const fetchGptRecommendationReasons = async () => {
     const gptQuery = `
@@ -29,8 +29,6 @@ const useGptRecommendationReasons = (movieName) => {
         ],
       });
 
-      console.log("API Response:", completion);
-
       const reasons =
         completion.choices && completion.choices.length > 0
           ? completion.choices[0]?.message?.content?.trim() || ""
@@ -43,24 +41,23 @@ const useGptRecommendationReasons = (movieName) => {
         .map((reason) => reason.replace(/^\d+\.\s*/, ""))
         .slice(0, 5);
 
-      console.log("cleanedReasons: ", cleanedReasons);
-
       if (cleanedReasons.length > 0) {
-        dispatch(addReasonsToWatch({ movieName, reasons: cleanedReasons }));
+        dispatch(addReasonsToWatch(cleanedReasons));
       } else {
         console.warn("No valid reasons to dispatch");
       }
     } catch (error) {
       console.error("Error fetching movie recommendations:", error);
-      // alert("Failed to fetch movie recommendations. Please try again.");
     }
   };
 
   useEffect(() => {
-    if (!movieDetails) {
+    if (!gptReasonsToWatch && movieName) {
       fetchGptRecommendationReasons();
     }
-  }, [movieName, movieDetails]);
+  }, [movieName, gptReasonsToWatch]);
+
+  return gptReasonsToWatch;
 };
 
 export default useGptRecommendationReasons;

@@ -22,7 +22,7 @@ const MovieCard = ({
     <>
       <div
         onClick={handleCardClick}
-        className="cursor-pointer w-24 sm:w-28 md:w-40 lg:w-56 aspect-[2/3] overflow-hidden rounded-sm"
+        className="cursor-pointer w-32 sm:w-28 md:w-40 lg:w-56 aspect-[2/3] overflow-hidden rounded-sm"
       >
         <img
           className="w-full h-full object-cover rounded-sm transition-all hover:scale-105"
