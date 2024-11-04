@@ -12,11 +12,9 @@ const GptSearchPage = () => {
     (store) => store.gpt
   );
 
-
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full flex flex-col">
       <Header />
-      {/* Background Image */}
       <div className="absolute w-full h-full overflow-hidden">
         <div className="fixed w-full h-full bg-black/80 z-10"></div>
         <img
@@ -25,12 +23,9 @@ const GptSearchPage = () => {
           src={LOGIN_BACKGROUND_IMAGE}
         />
       </div>
-
-      {/* Main Content */}
-      <div className="relative">
+      <div className="relative flex flex-col flex-grow">
         <GptSearchBar />
         {!searchBtnState && !searchMoviesInTMDB && <GptSearchWelcome />}
-
         <GptMovieSuggestions
           gptRecommandedMovies={gptRecommandedMovies}
           searchMoviesInTMDB={searchMoviesInTMDB}

@@ -47,6 +47,6 @@ export const OPENROUTER_HERMES_3_LLAMA =
 export const OPENROUTER_GOOGLE_GEMMA_2_9B =
   process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B; // google/gemma-2-9b-it:free (318)
 
-export const MODEL_NAME = "google/gemma-2-9b-it:free";
+export const MODEL_NAME = "nousresearch/hermes-3-llama-3.1-405b:free";
 
-export const MODEL_API_KEY = process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B;
+export const MODEL_API_KEY = process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA;

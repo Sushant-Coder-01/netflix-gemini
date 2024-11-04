@@ -10,13 +10,18 @@ const useGptRecommendationReasons = (movieName) => {
 
   const fetchGptRecommendationReasons = async () => {
     const gptQuery = `
-      Provide 5 brief reasons (maximum 2 lines each) why someone should watch the movie "${movieName}": 
-      1. 
-      2. 
-      3. 
-      4. 
-      5. 
-    `;
+    Provide an array of strings containing 5 brief reasons (each a maximum of 1 line) why someone should watch the movie "${movieName}". 
+    If unable to provide at least five distinct reasons, respond with an empty array.
+    
+    Each reason should highlight a unique aspect of the movie that makes it worth watching. Ensure the response is in the following format:
+    [
+      "reason1",
+      "reason2",
+      "reason3",
+      "reason4",
+      "reason5"
+    ]
+`;
 
     try {
       const completion = await client.chat.completions.create({
@@ -29,17 +34,9 @@ const useGptRecommendationReasons = (movieName) => {
         ],
       });
 
-      const reasons =
-        completion.choices && completion.choices.length > 0
-          ? completion.choices[0]?.message?.content?.trim() || ""
-          : "";
+      const reasons = completion.choices[0]?.message?.content?.trim() || "[]";
 
-      const cleanedReasons = reasons
-        .split("\n")
-        .map((reason) => reason.trim())
-        .filter((reason) => reason.length > 0 && /^(\d+\.\s)/.test(reason))
-        .map((reason) => reason.replace(/^\d+\.\s*/, ""))
-        .slice(0, 5);
+      const cleanedReasons = JSON.parse(reasons);
 
       if (cleanedReasons.length > 0) {
         dispatch(addReasonsToWatch(cleanedReasons));

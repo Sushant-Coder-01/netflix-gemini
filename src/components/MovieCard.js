@@ -12,7 +12,7 @@ const MovieCard = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  if (!posterPath) return;
+  if (!posterPath) return null;
 
   const handleCardClick = () => {
     setShowModal(true); // Open modal when card is clicked

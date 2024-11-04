@@ -50,10 +50,10 @@ const Carousel = ({ items }) => {
   ];
 
   return (
-    <div className="relative flex flex-col items-center justify-center w-full px-4 space-y-10 md:space-y-20">
+    <div className="relative flex flex-col items-center justify-center w-full px-4 space-y-20">
       {/* Carousel Container */}
       <div
-        className="flex items-center space-x-4 md:space-x-24 overflow-hidden w-full md:w-auto"
+        className="flex items-center space-x-4 md:space-x-24 overflow-hidden w-auto md:w-auto"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
@@ -66,7 +66,7 @@ const Carousel = ({ items }) => {
         </button>
 
         {/* Carousel Items */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 mt-2">
           {items?.map((item, index) => {
             const isCurrent = index === currentIndex;
 
@@ -76,13 +76,13 @@ const Carousel = ({ items }) => {
                 className={`transition-all duration-500 rounded-lg flex items-center justify-center 
                   ${
                     isCurrent
-                      ? "w-40 h-56 md:w-56 md:h-72"
+                      ? "w-44 h-60 md:w-56 md:h-72"
                       : "w-6 h-40 md:w-9 md:h-56"
                   } 
-                  ${colors[index % colors.length]} text-white p-4 shadow-lg`}
+                  ${colors[index % colors.length]} text-white p-2 shadow-lg`}
               >
                 {isCurrent && (
-                  <p className="text-center text-sm md:text-lg font-semibold transition-opacity duration-500 delay-1000 ease-in-out opacity-100 transform scale-95">
+                  <p className="text-center text-md md:text-lg font-semibold transition-opacity duration-500 delay-1000 ease-in-out opacity-100 transform scale-95">
                     {item}
                   </p>
                 )}
