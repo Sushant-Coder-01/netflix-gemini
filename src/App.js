@@ -1,16 +1,26 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider, useLocation } from "react-router-dom";
 import Login from "./components/Login";
 import Browse from "./components/HomePage";
 import Body from "./components/Body";
 import MovieTrailerPage from "./components/MovieTrailerPage";
 import GptSearchPage from "./components/GptSearchPage";
+import { useEffect } from "react";
 
-const Layout = () => (
+const Layout = () => {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    localStorage.setItem('lastPath', location.pathname);
+  }, [location]);
+  
+  return (
   <>
     <Body />
-    <Outlet /> {/* This Outlet will render child routes here */}
+    <Outlet /> 
   </>
 );
+};
 
 const appRouter = createBrowserRouter([
   {

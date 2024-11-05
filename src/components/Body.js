@@ -1,4 +1,3 @@
-// Body.js
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
@@ -22,15 +21,22 @@ const Body = () => {
             photoURL: photoURL,
           })
         );
-        navigate("/browse");
+
+        const lastPath = localStorage.getItem("lastPath");
+
+        if (lastPath === "/") {
+          navigate("/browse"); 
+        } else {
+          navigate(lastPath || "/browse"); 
+        }
       } else {
         dispatch(removeUser());
-        navigate("/");
+        navigate("/"); 
       }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [dispatch, navigate]); 
 
   return null;
 };

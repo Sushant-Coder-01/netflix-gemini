@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useMovieDetails from "../hooks/useMovieDetails";
 import useGptRecommendationReasons from "../hooks/useGptRecommendationReasons";
-import Shimmer, { CarouselShimmer } from "./Shimmer";
+import Shimmer, { CarouselShimmer, MovieSuggestionsShimmer } from "./Shimmer";
 import Carousel from "./Carousel";
 import downArrow from "../assets/icons/down-arrow-icon.png";
 import useSimilarMoviesByGenre from "../hooks/useSimilarMoviesByGenre";
@@ -46,9 +46,7 @@ const MovieTrailerPage = () => {
     if (trailerBanner) {
       trailerBanner.scrollIntoView({ behavior: "smooth" });
     }
-    
   }, [pathname, selectedTrailer]);
-
 
   if (!movieDetails) return null;
 
@@ -73,10 +71,11 @@ const MovieTrailerPage = () => {
       {/* Main Layout */}
       <div className="relative z-10 flex flex-col lg:flex-row mt-20 md:mx-2 md:ml-8 md:mt-5 ">
         {/* Left Content - Main Trailer and Details */}
-        <div
-          className="flex-1 mx-3 md:mx-0 md:sticky space-y-4 lg:w-3/4 lg:top-32 lg:self-start md:overflow-y-auto md:max-h-screen md:mt-12"
-        >
-          <div className=" text-3xl font-bold text-white z-10"id="trailer-banner">
+        <div className="flex-1 mx-3 md:mx-0 md:sticky space-y-4 lg:w-3/4 lg:top-32 lg:self-start md:overflow-y-auto md:max-h-screen md:mt-12">
+          <div
+            className=" text-3xl font-bold text-white z-10"
+            id="trailer-banner"
+          >
             <h1 className="text-3xl font-bold text-white truncate">
               {movieDetails?.title || "Movie Title"}
             </h1>
@@ -144,9 +143,17 @@ const MovieTrailerPage = () => {
                   )}
                 </div>
               </div>
-              <div className="hidden md:block h-screen">
-                <h1 className="text-2xl font-bold">Similar Movies</h1>
-                {gptGetSimilarMovieNames && <SimilarMovies />}
+              <div className="hidden md:block h-auto mt-12">
+                <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
+                {gptGetSimilarMovieNames ? (
+                  <SimilarMovies />
+                ) : (
+                  <>
+                <MovieSuggestionsShimmer />
+                <MovieSuggestionsShimmer />
+                <MovieSuggestionsShimmer />
+              </>
+                )}
               </div>
             </div>
           </div>
@@ -239,12 +246,16 @@ const MovieTrailerPage = () => {
               ))}
             </div>
           </div>
-          <div className="md:hidden h-auto mt-12">
+          <div className="md:hidden h-screen mt-10">
             <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
             {gptGetSimilarMovieNames ? (
               <SimilarMovies />
             ) : (
-              <Shimmer type="poster" />
+              <>
+                <MovieSuggestionsShimmer />
+                <MovieSuggestionsShimmer />
+                <MovieSuggestionsShimmer />
+              </>
             )}
           </div>
         </div>
