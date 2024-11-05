@@ -17,7 +17,8 @@ const MovieDetailsModal = ({
 
   const handlePlayButtonClick = () => {
     if (id) {
-      navigate(`/browse/trailer/${id}`);
+      navigate(`/browse/trailer/${id}#trailer-banner`);
+      onClose();
     } else {
       console.error("Movie ID is not defined");
     }

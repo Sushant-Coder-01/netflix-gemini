@@ -20,12 +20,12 @@ const ProfileConfig = () => {
   };
 
   return (
-    <div className="absolute w-40 sm:w-48 md:w-52 px-4 py-4 top-16 right-4 md:right-8 rounded-md bg-gray-700 bg-gradient-to-t from-black/70 shadow-lg">
-      <div className="flex flex-col space-y-3">
+    <div className="absolute w-40 h-40 sm:w-48 md:w-52 px-4 py-4 top-16 right-4 md:right-8 rounded-md bg-gray-700 bg-gradient-to-t from-black/70 shadow-lg">
+      <div className="flex flex-col items-center space-y-3 pt-5">
         {/* Language Selection */}
         <div>
           <select
-            className="w-full text-white px-2 py-1 rounded-md bg-gray-800 border border-red-700 focus:outline-none cursor-pointer text-xs sm:text-sm md:text-base"
+            className="text-white px-2 py-1 rounded-md bg-gray-800 border border-red-700 focus:outline-none cursor-pointer text-sm sm:text-sm md:text-base"
             onChange={handleLanguageChange}
           >
             {SUPPORTED_LANGUAGES.map((language) => (
@@ -36,14 +36,9 @@ const ProfileConfig = () => {
           </select>
         </div>
 
-        {/* Profile Settings Button */}
-        <button className=" sm:inline-block text-white text-xs sm:text-sm md:text-base lg:text-lg">
-          {lang[langKey].profileSettings}
-        </button>
-
         {/* Logout Button */}
         <button
-          className="text-white text-xs sm:text-sm md:text-base lg:text-lg"
+          className="text-white text-md sm:text-sm md:text-base lg:text-lg"
           onClick={handleLogoutBtn}
         >
           {lang[langKey].logout}

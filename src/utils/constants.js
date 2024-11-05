@@ -38,15 +38,20 @@ export const SUPPORTED_LANGUAGES = [
 
 export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
 
-export const OPENROUTER_MISTRAL_7B_Instruct =
-  process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT; // mistralai/mistral-7b-instruct:free (45)
 
-export const OPENROUTER_HERMES_3_LLAMA =
-  process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA; // nousresearch/hermes-3-llama-3.1-405b:free (318)
+export const OPENROUTER_GOOGLE_GEMMA_2_9B_45 = process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_45; // google/gemma-2-9b-it:free
 
-export const OPENROUTER_GOOGLE_GEMMA_2_9B =
-  process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B; // google/gemma-2-9b-it:free (318)
+export const OPENROUTER_MISTRAL_7B_INSTRUCT_45 = process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT_45; //  mistralai/mistral-7b-instruct:free
 
-export const MODEL_NAME = "nousresearch/hermes-3-llama-3.1-405b:free";
+export const OPENROUTER_HERMES_3_LLAMA_45 = process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA_45; // nousresearch/hermes-3-llama-3.1-405b:free
 
-export const MODEL_API_KEY = process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA;
+export const OPENROUTER_GOOGLE_GEMMA_2_9B_318 = process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_318; // google/gemma-2-9b-it:free
+
+export const OPENROUTER_MISTRAL_7B_INSTRUCT_318 =  process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT_318; //  mistralai/mistral-7b-instruct:free
+
+export const OPENROUTER_HERMES_3_LLAMA_318 = process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA_318; // nousresearch/hermes-3-llama-3.1-405b:free
+  
+
+export const MODEL_NAME = "google/gemma-2-9b-it:free";
+
+export const MODEL_API_KEY = process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_318;

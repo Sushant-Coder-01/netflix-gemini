@@ -23,7 +23,7 @@ const useMovieDetails = (movieId) => {
     if (movieId) {
       getMovieDetails();
     }
-  }, []);
+  }, [movieId]);
 };
 
 export default useMovieDetails;

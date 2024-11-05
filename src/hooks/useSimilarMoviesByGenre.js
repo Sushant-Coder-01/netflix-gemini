@@ -11,16 +11,14 @@ const useSimilarMoviesByGenre = (genres) => {
     const genresString = genres.join(", ");
 
     const query = `
-      For each genre in the following list: ${genresString}, provide an array of popular, top-rated, trending, or recent movie names.
-      The response should be a JSON object with each genre as a key, and each key's value should be an array of strings with exactly 5 movie names for that genre.
-      Do not include any additional text. Format the response exactly like this example:
-
-      {
-        "Animation": ["movieName1", "movieName2", "movieName3", "movieName4", "movieName5"],
-        "Science Fiction": ["movieName1", "movieName2", "movieName3", "movieName4", "movieName5"],
-        "Family": ["movieName1", "movieName2", "movieName3", "movieName4", "movieName5"]
-      }
-    `;
+  For each genre in the list ${genresString}, list exactly 5 popular movies in the following JSON format:
+  
+  [
+    { "genre": "genere name", "movies": ["movieName1", "movieName2", "movieName3", "movieName4", "movieName5"] },
+  ]
+  
+  Respond with JSON only, without any additional explanation or text.
+`;
 
     try {
       const completion = await client.chat.completions.create({
@@ -33,16 +31,12 @@ const useSimilarMoviesByGenre = (genres) => {
         ],
       });
 
-      const responseContent =
-        completion.choices[0]?.message?.content?.trim() || "{}";
-
-      console.log(responseContent);
+      const response = completion.choices[0]?.message?.content?.trim() || [];
 
       // Attempt to parse the JSON response
-      let movieDataByGenre;
       try {
-        movieDataByGenre = JSON.parse(responseContent);
-        if (Object?.keys(movieDataByGenre).length > 0) {
+        const movieDataByGenre = JSON.parse(response);
+        if (movieDataByGenre) {
           dispatch(addGptGetSimilarMovieNames(movieDataByGenre));
         } else {
           console.warn("No valid movie data to dispatch");

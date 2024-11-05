@@ -1,12 +1,12 @@
 import useMovieVideo from "../hooks/useMovieVideo";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Header from "./Header";
 import { LOGIN_BACKGROUND_IMAGE } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useMovieDetails from "../hooks/useMovieDetails";
 import useGptRecommendationReasons from "../hooks/useGptRecommendationReasons";
-import { CarouselShimmer } from "./Shimmer";
+import Shimmer, { CarouselShimmer } from "./Shimmer";
 import Carousel from "./Carousel";
 import downArrow from "../assets/icons/down-arrow-icon.png";
 import useSimilarMoviesByGenre from "../hooks/useSimilarMoviesByGenre";
@@ -23,27 +23,38 @@ const MovieTrailerPage = () => {
   const movieDetails = useSelector((store) => store.movies.movieDetails);
   const gptReasonsToWatch = useGptRecommendationReasons(movieDetails?.title);
   const [showPlaylistCarousel, setShowPlaylistCarousel] = useState(false);
+
   const genres = movieDetails?.genres?.map((genre) => genre.name);
+
   const gptGetSimilarMovieNames = useSelector(
     (store) => store.gpt.gptGetSimilarMovieNames
   );
 
   useMovieDetails(id);
+  const { pathname } = useLocation();
   useSimilarMoviesByGenre(movieGenres);
 
   useEffect(() => {
     if (genres) {
       dispatch(addMovieGenres(genres));
     }
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    // Scroll to the trailer-banner when the component mounts
+    const trailerBanner = document.getElementById("trailer-banner");
+    if (trailerBanner) {
+      trailerBanner.scrollIntoView({ behavior: "smooth" });
+    }
+    
+  }, [pathname, selectedTrailer]);
+
 
   if (!movieDetails) return null;
 
   const handlePlaylistCarousel = () => {
     setShowPlaylistCarousel(!showPlaylistCarousel);
   };
-
-  console.log(gptGetSimilarMovieNames, "hii");
 
   return (
     <div className="relative overflow-hidden bg-black text-white">
@@ -62,8 +73,10 @@ const MovieTrailerPage = () => {
       {/* Main Layout */}
       <div className="relative z-10 flex flex-col lg:flex-row mt-20 md:mx-2 md:ml-8 md:mt-5 ">
         {/* Left Content - Main Trailer and Details */}
-        <div className="flex-1 mx-3 md:mx-0 md:sticky space-y-4 lg:w-3/4 lg:top-32 lg:self-start md:overflow-y-auto md:max-h-screen md:mt-12">
-          <div className=" text-3xl font-bold text-white z-10">
+        <div
+          className="flex-1 mx-3 md:mx-0 md:sticky space-y-4 lg:w-3/4 lg:top-32 lg:self-start md:overflow-y-auto md:max-h-screen md:mt-12"
+        >
+          <div className=" text-3xl font-bold text-white z-10"id="trailer-banner">
             <h1 className="text-3xl font-bold text-white truncate">
               {movieDetails?.title || "Movie Title"}
             </h1>
@@ -131,7 +144,7 @@ const MovieTrailerPage = () => {
                   )}
                 </div>
               </div>
-              <div className="hidden md:block h-auto">
+              <div className="hidden md:block h-screen">
                 <h1 className="text-2xl font-bold">Similar Movies</h1>
                 {gptGetSimilarMovieNames && <SimilarMovies />}
               </div>
@@ -228,7 +241,11 @@ const MovieTrailerPage = () => {
           </div>
           <div className="md:hidden h-auto mt-12">
             <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
-            {gptGetSimilarMovieNames ? <SimilarMovies /> : null}
+            {gptGetSimilarMovieNames ? (
+              <SimilarMovies />
+            ) : (
+              <Shimmer type="poster" />
+            )}
           </div>
         </div>
       </div>

@@ -8,13 +8,9 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
 
   const getGptSearchMovie = async () => {
     try {
-      // Loop over each genre and its movie names in the array
       const genreMoviesMap = await Promise.all(
-        gptGetSimilarMovieNames.map(async ([genre, movieNames]) => {
-          const uniqueMovies = [...new Set(movieNames.filter(Boolean))]; // Remove duplicates and null values
-
-          // Fetch movie data for each movie name under this genre
-          const moviePromises = uniqueMovies.map((movieName) =>
+        gptGetSimilarMovieNames?.map(async ({ genre, movies }) => {
+          const moviePromises = movies?.map((movieName) =>
             fetch(
               `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
                 movieName
@@ -32,12 +28,12 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
                 }
                 return response.json();
               })
-              .then((data) => data.results || [])
+              .then((data) => data.results)
           );
 
           // Wait for all movie data fetches to complete
           const moviesDataArray = await Promise.all(moviePromises);
-          
+
           // Flatten results and filter out empty arrays
           const allMovies = moviesDataArray.flat().filter(Boolean);
 
@@ -47,20 +43,19 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
       );
 
       // Dispatch all genres and their movies at once
-      genreMoviesMap.forEach(({ genre, movies }) => {
+      genreMoviesMap?.forEach(({ genre, movies }) => {
         dispatch(addSimilarMovie({ genre, movies }));
       });
-
     } catch (error) {
       console.error("Error fetching movie data:", error);
     }
   };
 
   useEffect(() => {
-    if (gptGetSimilarMovieNames?.length > 0) {
+    if (gptGetSimilarMovieNames) {
       getGptSearchMovie();
     }
-  }, [gptGetSimilarMovieNames]);
+  }, []);
 };
 
 export default useGptSearchMovie;

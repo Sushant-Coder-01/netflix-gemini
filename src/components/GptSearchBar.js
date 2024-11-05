@@ -57,12 +57,8 @@ const GptSearchBar = () => {
       const gptRecommendedMovies =
         completion.choices[0]?.message?.content?.trim() || "[]"; // Default to empty array if no content
 
-      console.log(gptRecommendedMovies);
-
       // Parse the response to get the array of movies
       const cleanedMovies = JSON.parse(gptRecommendedMovies);
-
-      console.log(cleanedMovies);
 
       if (Array.isArray(cleanedMovies)) {
         dispatch(addRecommandedMovies(cleanedMovies));

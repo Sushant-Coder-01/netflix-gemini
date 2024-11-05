@@ -2,12 +2,12 @@ import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
 
-  if(!movies?.length) return
+  if (!movies?.length) return;
 
   return (
-    <div className="my-5 md:my-10 md:mx-4">
+    <div className="my-5 mb-0 md:mb-0 md:my-10 md:mx-4">
       <div className="text-white text-2xl mx-8 font-semibold">{title}</div>
-      <div className="flex  mx-8 mr-7 my-3 overflow-x-scroll custom-scrollbar-horizontal">
+      <div className="flex  mx-8 mr-7 my-3 mb-0 md:mb-0 overflow-x-scroll custom-scrollbar-horizontal">
         <div className="flex gap-4 md:gap-16">
           {movies?.map((movie) => (
             <MovieCard
