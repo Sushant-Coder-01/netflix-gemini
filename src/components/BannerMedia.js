@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import useMovieVideo from "../hooks/useMovieVideo";
 import { useEffect } from "react";
 import { addBannerMovie } from "../redux/moviesSlice";
-import LiteYouTubeEmbed from "react-lite-youtube-embed";
 
 const BannerMedia = ({ movieId }) => {
   const dispatch = useDispatch();

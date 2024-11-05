@@ -26,6 +26,9 @@ const moviesSlice = createSlice({
     addMovieTrailer: (state, action) => {
       state.movieTrailer = action.payload;
     },
+    clearMovieTrailer: (state) => {
+      state.movieTrailer = null;
+    },
     addPopularMovies: (state, action) => {
       state.popularMovies = action.payload;
     },
@@ -44,8 +47,14 @@ const moviesSlice = createSlice({
     addMovieDetails: (state, action) => {
       state.movieDetails = action.payload;
     },
+    cleanMovieDetails: (state) => {
+      state.movieDetails = null;
+    },
     addMovieGenres: (state, action) => {
       state.genres = action.payload;
+    },
+    cleanMovieGenres: (state) => {
+      state.genreMovies = [];
     },
     addBannerMovie: (state, action) => {
       state.bannerMovie = action.payload;
@@ -73,11 +82,14 @@ export const {
   addTrendingMovies,
   addRelatedTrailers,
   addMovieDetails,
+  cleanMovieDetails,
   addBannerMovie,
   clearBannerMovie,
   addSimilarMovie,
   addMovieGenres,
   cleanSimilarMovie,
+  cleanMovieGenres,
+  clearMovieTrailer,
 } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

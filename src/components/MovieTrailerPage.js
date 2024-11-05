@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useMovieDetails from "../hooks/useMovieDetails";
 import useGptRecommendationReasons from "../hooks/useGptRecommendationReasons";
-import Shimmer, { CarouselShimmer, MovieSuggestionsShimmer } from "./Shimmer";
+import { CarouselShimmer, MovieSuggestionsShimmer } from "./Shimmer";
 import Carousel from "./Carousel";
 import downArrow from "../assets/icons/down-arrow-icon.png";
 import useSimilarMoviesByGenre from "../hooks/useSimilarMoviesByGenre";
-import { addMovieGenres } from "../redux/moviesSlice";
+import { addMovieGenres, cleanMovieGenres } from "../redux/moviesSlice";
 import SimilarMovies from "./SimilarMovies";
 
 const MovieTrailerPage = () => {
@@ -21,7 +21,8 @@ const MovieTrailerPage = () => {
   const relatedTrailers = useSelector((store) => store.movies.relatedTrailers);
   const [selectedTrailer, setSelectedTrailer] = useState(null);
   const movieDetails = useSelector((store) => store.movies.movieDetails);
-  const gptReasonsToWatch = useGptRecommendationReasons(movieDetails?.title);
+  useGptRecommendationReasons(movieDetails);
+  const gptReasonsToWatch = useSelector((state) => state.gpt.gptReasonsToWatch);
   const [showPlaylistCarousel, setShowPlaylistCarousel] = useState(false);
 
   const genres = movieDetails?.genres?.map((genre) => genre.name);
@@ -32,16 +33,16 @@ const MovieTrailerPage = () => {
 
   useMovieDetails(id);
   const { pathname } = useLocation();
+  
   useSimilarMoviesByGenre(movieGenres);
 
   useEffect(() => {
     if (genres) {
       dispatch(addMovieGenres(genres));
     }
-  }, [id]);
+  }, [movieDetails]);
 
   useEffect(() => {
-    // Scroll to the trailer-banner when the component mounts
     const trailerBanner = document.getElementById("trailer-banner");
     if (trailerBanner) {
       trailerBanner.scrollIntoView({ behavior: "smooth" });
@@ -149,10 +150,10 @@ const MovieTrailerPage = () => {
                   <SimilarMovies />
                 ) : (
                   <>
-                <MovieSuggestionsShimmer />
-                <MovieSuggestionsShimmer />
-                <MovieSuggestionsShimmer />
-              </>
+                    <MovieSuggestionsShimmer />
+                    <MovieSuggestionsShimmer />
+                    <MovieSuggestionsShimmer />
+                  </>
                 )}
               </div>
             </div>
@@ -229,7 +230,7 @@ const MovieTrailerPage = () => {
                   }`}
                 >
                   <img
-                    src={`https://img.youtube.com/vi/${trailer.key}/0.jpg`} // YouTube thumbnail URL
+                    src={`https://img.youtube.com/vi/${trailer.key}/0.jpg`}
                     alt={trailer.title}
                     className="w-full aspect-auto border-2 rounded-md mb-2"
                   />
@@ -246,7 +247,7 @@ const MovieTrailerPage = () => {
               ))}
             </div>
           </div>
-          <div className="md:hidden h-screen mt-10">
+          <div className="md:hidden h-auto pb-5 mt-10">
             <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
             {gptGetSimilarMovieNames ? (
               <SimilarMovies />

@@ -4,11 +4,11 @@ import { MODEL_NAME } from "../utils/constants";
 import { addGptGetSimilarMovieNames } from "../redux/gptSlice";
 import client from "../utils/openai";
 
-const useSimilarMoviesByGenre = (genres) => {
+const useSimilarMoviesByGenre = (movieGenres) => {
   const dispatch = useDispatch();
 
   const fetchSimilarMovies = async () => {
-    const genresString = genres.join(", ");
+    const genresString = movieGenres.join(", ");
 
     const query = `
   For each genre in the list ${genresString}, list exactly 5 popular movies in the following JSON format:
@@ -33,7 +33,6 @@ const useSimilarMoviesByGenre = (genres) => {
 
       const response = completion.choices[0]?.message?.content?.trim() || [];
 
-      // Attempt to parse the JSON response
       try {
         const movieDataByGenre = JSON.parse(response);
         if (movieDataByGenre) {
@@ -50,10 +49,10 @@ const useSimilarMoviesByGenre = (genres) => {
   };
 
   useEffect(() => {
-    if (genres) {
+    if (movieGenres) {
       fetchSimilarMovies();
     }
-  }, []);
+  }, [movieGenres]);
 };
 
 export default useSimilarMoviesByGenre;

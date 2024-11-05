@@ -36,7 +36,11 @@ const gptSearch = createSlice({
     },
     addGptGetSimilarMovieNames: (state, action) => {
       state.gptGetSimilarMovieNames = action.payload;
+    },
+    cleanGptGetSimilarMovieName: (state) => {
+      state.gptGetSimilarMovieNames = null;
     }
+
   },
 });
 
@@ -50,6 +54,7 @@ export const {
   addReasonsToWatch,
   clearReasonsToWatch,
   addGptGetSimilarMovieNames,
+  cleanGptGetSimilarMovieName,
 } = gptSearch.actions;
 
 export default gptSearch.reducer;

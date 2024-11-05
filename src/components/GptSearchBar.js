@@ -32,6 +32,10 @@ const GptSearchBar = () => {
     dispatch(clearSearchMoviesInTMDB());
     dispatch(toggleSearchBtn(true));
 
+
+
+    
+
     // Generalized GPT query for any type of input
     const gptQuery = `
     You are a "Movie Recommendation System". Based on the user's interest in "${promptValue}", provide a list of movies that are closely related to this interest.
@@ -65,6 +69,7 @@ const GptSearchBar = () => {
       } else {
         console.error("Invalid response format:", cleanedMovies);
       }
+
     } catch (error) {
       console.error("Error fetching movie recommendations:", error);
       alert("Failed to fetch movie recommendations. Please try again.");

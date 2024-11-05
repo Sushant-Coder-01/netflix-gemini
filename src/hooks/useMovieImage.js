@@ -27,7 +27,7 @@ const useMovieImage = (movieId) => {
     if (movieId) {
       fetchMovieImage();
     }
-  }, []);
+  }, [movieId]);
 
   const image = useSelector((store) => store.movies?.moviesLogo);
   return image?.file_path;

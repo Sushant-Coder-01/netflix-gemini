@@ -4,13 +4,12 @@ import { addReasonsToWatch } from "../redux/gptSlice";
 import client from "../utils/openai";
 import { MODEL_NAME } from "../utils/constants";
 
-const useGptRecommendationReasons = (movieName) => {
+const useGptRecommendationReasons = (movieDetails) => {
   const dispatch = useDispatch();
-  const gptReasonsToWatch = useSelector((state) => state.gpt.gptReasonsToWatch);
 
   const fetchGptRecommendationReasons = async () => {
     const gptQuery = `
-    Provide an array of strings containing 5 brief reasons (each a maximum of 1 line) why someone should watch the movie "${movieName}". 
+    Provide an array of strings containing 5 brief reasons (each a maximum of 1 line) why someone should watch the movie "${movieDetails?.title}". 
     If unable to provide at least five distinct reasons, respond with an empty array.
     
     Each reason should highlight a unique aspect of the movie that makes it worth watching. Ensure the response is in the following format:
@@ -34,7 +33,7 @@ const useGptRecommendationReasons = (movieName) => {
         ],
       });
 
-      const reasons = completion.choices[0]?.message?.content?.trim() || "[]";
+      const reasons = completion.choices[0]?.message?.content?.trim() || [];
 
       const cleanedReasons = JSON.parse(reasons);
 
@@ -49,12 +48,10 @@ const useGptRecommendationReasons = (movieName) => {
   };
 
   useEffect(() => {
-    if (!gptReasonsToWatch && movieName) {
+    if (movieDetails) {
       fetchGptRecommendationReasons();
     }
-  }, [movieName, gptReasonsToWatch]);
-
-  return gptReasonsToWatch;
+  }, [movieDetails]);
 };
 
 export default useGptRecommendationReasons;

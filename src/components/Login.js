@@ -31,12 +31,12 @@ const Login = () => {
 
   const handleButtonClick = () => {
     const message = isSignIn
-      ? validateFormDataForSignIn(email.current.value, password.current.value)
+      ? validateFormDataForSignIn(email.current.value.trim(), password.current.value.trim())
       : validateFormDataForSignUp(
-          fullName.current.value,
-          userName.current.value,
-          email.current.value,
-          password.current.value
+          fullName.current.value.trim(),
+          userName.current.value.trim(),
+          email.current.value.trim(),
+          password.current.value.trim()
         );
     setErrorMessage(message);
 

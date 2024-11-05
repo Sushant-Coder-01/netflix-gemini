@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import useGptSearchMovie from "../hooks/useGptSearchMovie";
-import { MovieSuggestionsShimmer } from "./Shimmer";
 import MovieList from "./MovieList";
 import { useEffect } from "react";
 import { cleanSimilarMovie } from "../redux/moviesSlice";
@@ -24,9 +23,9 @@ const SimilarMovies = () => {
   return (
     <div>
       {Object.keys(similarMovies).length > 0 &&
-        Object.keys(similarMovies)?.map((genere) => (
+        Object.keys(similarMovies)?.map((genere, index) => (
           <MovieList
-            key={genere}
+            key={index}
             title={genere}
             movies={similarMovies[genere]}
           />

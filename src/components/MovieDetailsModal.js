@@ -55,10 +55,10 @@ const MovieDetailsModal = ({
             <div className="flex flex-col items-start space-y-2 sm:space-y-4">
               <div className="flex items-center">
                 <span className="text-md sm:text-lg font-semibold">
-                  Avg Voting:
+                  Avg Rating:
                 </span>
                 <span className="ml-2 text-yellow-400 font-bold text-base sm:text-lg">
-                  {avgVote}
+                  {avgVote.toFixed(1)}
                 </span>
               </div>
               <div className="flex items-center">

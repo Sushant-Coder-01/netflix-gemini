@@ -33,7 +33,7 @@ const useMovieVideo = (movieId) => {
     if (movieId) {
       getMovieVideos();
     }
-  }, [movieId, dispatch]);
+  }, [movieId]);
 
   const trailerVideo = useSelector((store) => store.movies?.movieTrailer);
   return trailerVideo;

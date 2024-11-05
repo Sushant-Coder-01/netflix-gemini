@@ -31,18 +31,14 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
               .then((data) => data.results)
           );
 
-          // Wait for all movie data fetches to complete
           const moviesDataArray = await Promise.all(moviePromises);
 
-          // Flatten results and filter out empty arrays
           const allMovies = moviesDataArray.flat().filter(Boolean);
 
-          // Return an object with genre as the key and the movie data as value
           return { genre, movies: allMovies };
         })
       );
 
-      // Dispatch all genres and their movies at once
       genreMoviesMap?.forEach(({ genre, movies }) => {
         dispatch(addSimilarMovie({ genre, movies }));
       });
