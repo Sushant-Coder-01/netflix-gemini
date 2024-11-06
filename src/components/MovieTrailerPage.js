@@ -10,37 +10,28 @@ import { CarouselShimmer, MovieSuggestionsShimmer } from "./Shimmer";
 import Carousel from "./Carousel";
 import downArrow from "../assets/icons/down-arrow-icon.png";
 import useSimilarMoviesByGenre from "../hooks/useSimilarMoviesByGenre";
-import { addMovieGenres, cleanMovieGenres } from "../redux/moviesSlice";
 import SimilarMovies from "./SimilarMovies";
+import { cleanSimilarMovie } from "../redux/moviesSlice";
 
 const MovieTrailerPage = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
-  const movieGenres = useSelector((store) => store.movies.genres);
+  const { pathname } = useLocation();
+  const { id } = useParams();
+  useMovieDetails(id);
+
   const trailerVideo = useMovieVideo(id);
-  const relatedTrailers = useSelector((store) => store.movies.relatedTrailers);
-  const [selectedTrailer, setSelectedTrailer] = useState(null);
   const movieDetails = useSelector((store) => store.movies.movieDetails);
   useGptRecommendationReasons(movieDetails);
+  useSimilarMoviesByGenre(movieDetails);
+
+  const relatedTrailers = useSelector((store) => store.movies.relatedTrailers);
+  const [selectedTrailer, setSelectedTrailer] = useState(null);
   const gptReasonsToWatch = useSelector((state) => state.gpt.gptReasonsToWatch);
   const [showPlaylistCarousel, setShowPlaylistCarousel] = useState(false);
-
-  const genres = movieDetails?.genres?.map((genre) => genre.name);
 
   const gptGetSimilarMovieNames = useSelector(
     (store) => store.gpt.gptGetSimilarMovieNames
   );
-
-  useMovieDetails(id);
-  const { pathname } = useLocation();
-  
-  useSimilarMoviesByGenre(movieGenres);
-
-  useEffect(() => {
-    if (genres) {
-      dispatch(addMovieGenres(genres));
-    }
-  }, [movieDetails]);
 
   useEffect(() => {
     const trailerBanner = document.getElementById("trailer-banner");
@@ -48,6 +39,10 @@ const MovieTrailerPage = () => {
       trailerBanner.scrollIntoView({ behavior: "smooth" });
     }
   }, [pathname, selectedTrailer]);
+
+  useEffect(() => {
+    return () => dispatch(cleanSimilarMovie());
+  }, [movieDetails]);
 
   if (!movieDetails) return null;
 
@@ -146,7 +141,7 @@ const MovieTrailerPage = () => {
               </div>
               <div className="hidden md:block h-auto mt-12">
                 <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
-                {gptGetSimilarMovieNames ? (
+                {movieDetails ? (
                   <SimilarMovies />
                 ) : (
                   <>
@@ -249,7 +244,7 @@ const MovieTrailerPage = () => {
           </div>
           <div className="md:hidden h-auto pb-5 mt-10">
             <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
-            {gptGetSimilarMovieNames ? (
+            {movieDetails ? (
               <SimilarMovies />
             ) : (
               <>

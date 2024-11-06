@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { cleanSimilarMovie } from "../redux/moviesSlice";
 
 const SimilarMovies = () => {
+
   const gptGetSimilarMovieNames = useSelector(
     (store) => store.gpt.gptGetSimilarMovieNames
   );
@@ -16,7 +17,7 @@ const SimilarMovies = () => {
 
   useEffect(() => {
     return () => dispatch(cleanSimilarMovie());
-  }, []);
+  }, [gptGetSimilarMovieNames]);
 
   if (!similarMovies) return;
 

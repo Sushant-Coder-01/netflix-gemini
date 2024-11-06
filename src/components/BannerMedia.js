@@ -11,7 +11,7 @@ const BannerMedia = ({ movieId }) => {
     if (movieId) {
       dispatch(addBannerMovie(movieId));
     }
-  }, [dispatch, movieId]);
+  }, [movieId]);
 
   return (
     <div

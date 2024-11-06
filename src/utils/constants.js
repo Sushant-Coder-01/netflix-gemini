@@ -36,33 +36,15 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "japanese", name: "Japanese" },
 ];
 
-export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
 
 export const OPENROUTER_GOOGLE_GEMMA_2_9B_45 =
   process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_45; // google/gemma-2-9b-it:free
 
-export const OPENROUTER_MISTRAL_7B_INSTRUCT_45 =
-  process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT_45; //  mistralai/mistral-7b-instruct:free
-
-export const OPENROUTER_HERMES_3_LLAMA_45 =
-  process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA_45; // nousresearch/hermes-3-llama-3.1-405b:free
-
-export const OPENROUTER_OPENCHAT_7b =
-  process.env.REACT_APP_OPENROUTER_OPENCHAT_7b; // openchat/openchat-7b:free
-
 export const OPENROUTER_GOOGLE_GEMMA_2_9B_318 =
   process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_318; // google/gemma-2-9b-it:free
 
-export const OPENROUTER_MISTRAL_7B_INSTRUCT_318 =
-  process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT_318; //  mistralai/mistral-7b-instruct:free
 
-export const OPENROUTER_HERMES_3_LLAMA_318 =
-  process.env.REACT_APP_OPENROUTER_HERMES_3_LLAMA_318; // nousresearch/hermes-3-llama-3.1-405b:free
-
-export const OPENROUTER_MISTRAL_7B_INSTRUCT_A29 =
-  process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT_A29; //  mistralai/mistral-7b-instruct:free
-
-export const MODEL_NAME = "mistralai/mistral-7b-instruct:free";
+export const MODEL_NAME = "google/gemma-2-9b-it:free";
 
 export const MODEL_API_KEY =
-  process.env.REACT_APP_OPENROUTER_MISTRAL_7B_INSTRUCT_A29;
+  process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_45;

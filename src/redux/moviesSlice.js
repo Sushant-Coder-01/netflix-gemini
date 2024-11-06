@@ -12,7 +12,6 @@ const moviesSlice = createSlice({
     trendingMovies: null,
     relatedTrailers: null,
     movieDetails: null,
-    genres: null,
     bannerMovie: null,
     genreMovies: {},
   },
@@ -50,12 +49,6 @@ const moviesSlice = createSlice({
     cleanMovieDetails: (state) => {
       state.movieDetails = null;
     },
-    addMovieGenres: (state, action) => {
-      state.genres = action.payload;
-    },
-    cleanMovieGenres: (state) => {
-      state.genreMovies = [];
-    },
     addBannerMovie: (state, action) => {
       state.bannerMovie = action.payload;
     },
@@ -86,9 +79,7 @@ export const {
   addBannerMovie,
   clearBannerMovie,
   addSimilarMovie,
-  addMovieGenres,
   cleanSimilarMovie,
-  cleanMovieGenres,
   clearMovieTrailer,
 } = moviesSlice.actions;
 

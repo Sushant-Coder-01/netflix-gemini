@@ -17,14 +17,14 @@ const MovieDetailsModal = ({
 
   const handlePlayButtonClick = () => {
     if (id) {
-      navigate(`/browse/trailer/${id}#trailer-banner`);
+      navigate(`/browse/trailer/${id}`);
       onClose();
     } else {
       console.error("Movie ID is not defined");
     }
   };
 
-  return (
+  return (  
     <div className="fixed inset-0 z-60 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm transition-all duration-300">
       <div className="relative bg-gray-800 text-white h-auto sm:h-auto p-6 sm:p-8 md:p-10 w-10/12 sm:w-10/12 md:w-3/4 lg:w-3/5 xl:w-1/2 max-w-4xl rounded-2xl shadow-2xl transform transition-all duration-300">
         {/* Close Button */}

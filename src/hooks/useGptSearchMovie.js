@@ -9,7 +9,7 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
   const getGptSearchMovie = async () => {
     try {
       const genreMoviesMap = await Promise.all(
-        gptGetSimilarMovieNames?.map(async ({ genre, movies }) => {
+        gptGetSimilarMovieNames?.map(async ({ genre, movies }) => { 
           const moviePromises = movies?.map((movieName) =>
             fetch(
               `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
@@ -33,9 +33,21 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
 
           const moviesDataArray = await Promise.all(moviePromises);
 
+          // Flatten the array and filter out duplicates by movie ID
           const allMovies = moviesDataArray.flat().filter(Boolean);
 
-          return { genre, movies: allMovies };
+          // Use a Map to keep only unique movies based on their ID
+          const uniqueMoviesMap = new Map();
+          allMovies.forEach((movie) => {
+            if (!uniqueMoviesMap.has(movie.id)) {
+              uniqueMoviesMap.set(movie.id, movie);
+            }
+          });
+
+          // Get the unique movies array from the Map
+          const uniqueMovies = Array.from(uniqueMoviesMap.values());
+
+          return { genre, movies: uniqueMovies };
         })
       );
 
@@ -51,7 +63,7 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
     if (gptGetSimilarMovieNames) {
       getGptSearchMovie();
     }
-  }, []);
+  }, [gptGetSimilarMovieNames]);
 };
 
 export default useGptSearchMovie;
