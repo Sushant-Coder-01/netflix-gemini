@@ -9,7 +9,7 @@ const GptMovieSuggestions = ({ gptRecommandedMovies, searchMoviesInTMDB }) => {
   useSearchMovie(gptRecommandedMovies);
 
   return (
-    <div className="w-11/12 h-auto  bg-gray-600/40 absolute ml-5 md:ml-20 mt-48 z-10 rounded-md">
+    <div className="w-11/12 h-auto  bg-gray-600/40 absolute ml-5 md:ml-20 my-48 z-10 rounded-md">
       {searchBtnState && (
         <>
           <MovieSuggestionsShimmer />
