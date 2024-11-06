@@ -3,17 +3,16 @@ import { changeLanguage } from "../redux/configSlice";
 import { auth } from "../utils/firebase";
 import { SUPPORTED_LANGUAGES } from "../utils/constants";
 import { lang } from "../utils/languageConstants";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const ProfileConfig = () => {
-  const dispatch = useDispatch();
-  const langKey = useSelector((store) => store.config.lang);
-
+const ProfileConfig = ({langKey}) => {
   const handleLogoutBtn = () => {
     signOut(auth)
       .then(() => {})
       .catch((error) => {});
   };
+
+  const dispatch = useDispatch();
 
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
@@ -27,6 +26,7 @@ const ProfileConfig = () => {
           <select
             className="text-white px-2 py-1 rounded-md bg-gray-800 border border-red-700 focus:outline-none cursor-pointer text-sm sm:text-sm md:text-base"
             onChange={handleLanguageChange}
+            value={langKey}
           >
             {SUPPORTED_LANGUAGES.map((language) => (
               <option key={language.identifier} value={language.identifier}>

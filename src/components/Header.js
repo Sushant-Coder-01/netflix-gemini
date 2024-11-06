@@ -105,7 +105,7 @@ const Header = () => {
 
             {profileConfig && (
               <div className="absolute top-0 right-0 md:right-0 z-40">
-                <ProfileConfig />
+                <ProfileConfig langKey={langKey} />
               </div>
             )}
           </div>
