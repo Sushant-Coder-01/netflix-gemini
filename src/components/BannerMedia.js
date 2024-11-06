@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import useMovieVideo from "../hooks/useMovieVideo";
 import { useEffect, useState } from "react";
 import { addBannerMovie } from "../redux/moviesSlice";
+import { MUTE_ICON, UNMUTE_ICON } from "../utils/constants";
 
 const BannerMedia = ({ movieId }) => {
   const dispatch = useDispatch();
@@ -40,7 +41,8 @@ const BannerMedia = ({ movieId }) => {
         onClick={toggleMute}
         className="absolute top-48 md:top-[60%] right-5 md:right-10 p-2 rounded-full bg-gray-700 bg-opacity-70 text-white md:text-xl focus:outline-none cursor-pointer z-50"
       >
-        {isMuted ? "🔇" : "🔊"}
+        {isMuted ? <img width="24" height="24" src={UNMUTE_ICON} alt="no-audio"/> : <img width="24" height="24" src={MUTE_ICON} alt="mute"/>
+        }
       </button>
     </div>
   );

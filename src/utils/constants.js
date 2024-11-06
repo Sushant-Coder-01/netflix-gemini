@@ -36,13 +36,17 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "japanese", name: "Japanese" },
 ];
 
+export const MUTE_ICON =
+  "https://img.icons8.com/forma-regular-filled/24/FFFFFF/mute.png";
+
+export const UNMUTE_ICON =
+  "https://img.icons8.com/forma-regular-filled/24/FFFFFF/no-audio.png";
 
 export const OPENROUTER_GOOGLE_GEMMA_2_9B_45 =
   process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_45; // google/gemma-2-9b-it:free
 
 export const OPENROUTER_GOOGLE_GEMMA_2_9B_318 =
   process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_318; // google/gemma-2-9b-it:free
-
 
 export const MODEL_NAME = "google/gemma-2-9b-it:free";
 
