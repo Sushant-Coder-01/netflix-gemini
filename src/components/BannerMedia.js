@@ -39,9 +39,9 @@ const BannerMedia = ({ movieId }) => {
       {/* Mute/Unmute Button */}
       <button
         onClick={toggleMute}
-        className="absolute top-48 md:top-[60%] right-5 md:right-10 p-2 rounded-full bg-gray-700 bg-opacity-70 text-white md:text-xl focus:outline-none cursor-pointer z-50"
+        className="absolute top-48 md:top-[60%] right-5 md:right-10 p-2 rounded-full bg-gray-700 bg-opacity-70 text-white focus:outline-none cursor-pointer z-10"
       >
-        {isMuted ? <img width="24" height="24" src={UNMUTE_ICON} alt="no-audio"/> : <img width="24" height="24" src={MUTE_ICON} alt="mute"/>
+        {isMuted ? <img width="20" height="20" src={UNMUTE_ICON} alt="no-audio"/> : <img width="20" height="20" src={MUTE_ICON} alt="mute"/>
         }
       </button>
     </div>
