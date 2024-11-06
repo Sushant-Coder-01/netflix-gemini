@@ -47,4 +47,4 @@ export const OPENROUTER_GOOGLE_GEMMA_2_9B_318 =
 export const MODEL_NAME = "google/gemma-2-9b-it:free";
 
 export const MODEL_API_KEY =
-  process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_45;
+  process.env.REACT_APP_OPENROUTER_GOOGLE_GEMMA_2_9B_318;
