@@ -10,8 +10,8 @@ const configSlice = createSlice({
     changeLanguage: (state, action) => {
       state.lang = action.payload;
     },
-    toggleSearchBtn: (state) => {
-      state.searchBtnState = !state.searchBtnState;
+    toggleSearchBtn: (state, action) => {
+      state.searchBtnState = action.payload;
     }
   },
 });

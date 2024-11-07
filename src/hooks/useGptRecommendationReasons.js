@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addReasonsToWatch } from "../redux/gptSlice";
+import { addReasonsToWatch, clearReasonsToWatch } from "../redux/gptSlice";
 import client from "../utils/openai";
 import { MODEL_NAME } from "../utils/constants";
+import useGeminiAPI from "./useGeminiAPI";
 
 const useGptRecommendationReasons = (movieDetails) => {
   const dispatch = useDispatch();
+  const { generateText, response, error } = useGeminiAPI();
 
   const fetchGptRecommendationReasons = async () => {
-      
     const gptQuery = `
     Provide exactly and only a JSON array of strings containing 5 brief reasons (each a maximum of 1 line) why someone should watch the movie "${movieDetails?.title}".
     If unable to provide at least five distinct reasons, respond with exactly: [].
@@ -23,33 +24,50 @@ const useGptRecommendationReasons = (movieDetails) => {
     ]
 `;
 
+    // try {
+    //   const completion = await client.chat.completions.create({
+    //     model: MODEL_NAME,
+    //     messages: [
+    //       {
+    //         role: "user",
+    //         content: gptQuery,
+    //       },
+    //     ],
+    //   });
+
+    //   const reasons = completion.choices[0]?.message?.content?.trim() || [];
+
+    //   const cleanedReasons = JSON.parse(reasons);
+
+    //   if (cleanedReasons.length > 0) {
+    //     dispatch(addReasonsToWatch(cleanedReasons));
+    //   } else {
+    //     console.warn("No valid reasons to dispatch");
+    //   }
+    // } catch (error) {
+    //   console.error("Error fetching movie recommendations:", error);
+    // }
+
     try {
-      const completion = await client.chat.completions.create({
-        model: MODEL_NAME,
-        messages: [
-          {
-            role: "user",
-            content: gptQuery,
-          },
-        ],
-      });
+      const apiResponse = await generateText(gptQuery);
 
-      const reasons = completion.choices[0]?.message?.content?.trim() || [];
+      console.log(apiResponse);
 
-      const cleanedReasons = JSON.parse(reasons);
+      const reasons = JSON.parse(apiResponse);
 
-      if (cleanedReasons.length > 0) {
-        dispatch(addReasonsToWatch(cleanedReasons));
+      if (reasons.length > 0) {
+        dispatch(addReasonsToWatch(reasons));
       } else {
         console.warn("No valid reasons to dispatch");
       }
     } catch (error) {
-      console.error("Error fetching movie recommendations:", error);
+      console.error("Error fetching movies reasons:", error);
     }
   };
 
   useEffect(() => {
     if (movieDetails) {
+      dispatch(clearReasonsToWatch());
       fetchGptRecommendationReasons();
     }
   }, [movieDetails]);

@@ -75,9 +75,9 @@ export const CarouselShimmer = () => {
   return (
     <div className="relative flex flex-col items-center justify-center w-full space-y-20 animate-pulse">
       {/* Carousel Shimmer Container */}
-      <div className="flex items-center space-x-24 overflow-hidden">
+      <div className="flex items-center md:space-x-24 overflow-hidden">
         {/* Left Arrow Placeholder */}
-        <div className="text-5xl text-gray-700"> &#10094; </div>
+        <div className="text-5xl text-gray-700 hidden md:block"> &#10094; </div>
 
         {/* Shimmer Carousel Items */}
         <div className="flex items-center space-x-4">
@@ -86,8 +86,8 @@ export const CarouselShimmer = () => {
               key={index}
               className={`rounded-lg shadow-lg ${
                 index === 2
-                  ? "w-56 h-72" // Focused item dimensions
-                  : "w-9 h-56" // Pipe-like dimensions for other items
+                  ? "w-44 h-60 md:w-56 md:h-72" // Focused item dimensions
+                  : "w-6 h-40 md:w-9 md:h-56" // Pipe-like dimensions for other items
               } ${shimmerColors[index % shimmerColors.length]} p-4`}
             >
               {index === 2 && (
@@ -101,7 +101,7 @@ export const CarouselShimmer = () => {
         </div>
 
         {/* Right Arrow Placeholder */}
-        <div className="text-5xl text-gray-700"> &#10095; </div>
+        <div className="text-5xl text-gray-700 hidden md:block"> &#10095; </div>
       </div>
 
       {/* Dot Placeholder */}

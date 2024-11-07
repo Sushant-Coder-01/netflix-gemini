@@ -17,9 +17,9 @@ const SimilarMovies = () => {
 
   useEffect(() => {
     return () => dispatch(cleanSimilarMovie());
-  }, [gptGetSimilarMovieNames]);
+  }, []);
 
-  if (!similarMovies) return;
+  if (!Object.keys(similarMovies).length) return;
 
   return (
     <div>

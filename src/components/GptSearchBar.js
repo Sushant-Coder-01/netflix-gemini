@@ -9,17 +9,71 @@ import {
   setGptPrompt,
 } from "../redux/gptSlice";
 import { toggleSearchBtn } from "../redux/configSlice";
-import { MODEL_NAME } from "../utils/constants";
+import { MODEL_API_KEY, MODEL_NAME } from "../utils/constants";
+import firebase from "firebase/compat/app";
+import useGeminiAPI from "../hooks/useGeminiAPI";
 
 const GptSearchBar = () => {
   const gptPrompt = useRef(null);
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
   const storedGptPrompt = useSelector((store) => store.gpt.gptPrompt);
+  const { generateText, response, error } = useGeminiAPI();
 
   const handleInputChange = (event) => {
     dispatch(setGptPrompt(event.target.value));
   };
+
+  // const handleGptSearchClick = async () => {
+  //   const promptValue = storedGptPrompt.trim();
+  //   if (!promptValue) {
+  //     alert("Please enter a movie-related interest.");
+  //     return;
+  //   }
+
+  //   dispatch(clearRecommandedMovies());
+  //   dispatch(clearSearchMoviesInTMDB());
+  //   dispatch(toggleSearchBtn(true));
+
+  //   // Generalized GPT query for any type of input
+  //   const gptQuery = `
+  //   You are a "Movie Recommendation System". Based on the user's interest in "${promptValue}", provide a list of movies that are closely related to this interest.
+
+  //   If "${promptValue}" matches a specific movie title, list that movie first. After that, include movies that fit the same genre or theme. Finally, include other relevant and popular movies that align loosely with the user’s interest.
+
+  //   Ensure that the order is: exact title match first (if applicable), followed by genre or theme-related movies, and then other relevant suggestions.
+
+  //   Only respond with an array of movie names as strings. If unable to provide at least five distinct movie names, respond with an empty array. Format your response as follows: ["Movie1", "Movie2", "Movie3", ...].
+  // `;
+
+  //   // try {
+  //   //   const completion = await client.chat.completions.create({
+  //   //     model: MODEL_NAME,
+  //   //     messages: [
+  //   //       {
+  //   //         role: "user",
+  //   //         content: gptQuery,
+  //   //       },
+  //   //     ],
+  //   //   });
+
+  //   try {
+  //     await generateText(gptQuery);
+
+  //     if (response) {
+  //       const data = response.json();
+  //       console.log(data);
+  //       dispatch(addRecommandedMovies(data));
+  //     } else {
+  //       alert("Unexpected response format. Please try again.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching movie recommendations:", error);
+  //     alert("Failed to fetch movie recommendations. Please try again.");
+  //   } finally {
+  //     dispatch(toggleSearchBtn(false));
+  //   }
+  // };
 
   const handleGptSearchClick = async () => {
     const promptValue = storedGptPrompt.trim();
@@ -32,47 +86,33 @@ const GptSearchBar = () => {
     dispatch(clearSearchMoviesInTMDB());
     dispatch(toggleSearchBtn(true));
 
-
-
-    
-
-    // Generalized GPT query for any type of input
     const gptQuery = `
-    You are a "Movie Recommendation System". Based on the user's interest in "${promptValue}", provide a list of movies that are closely related to this interest.
-
-    If "${promptValue}" matches a specific movie title, list that movie first. After that, include movies that fit the same genre or theme. Finally, include other relevant and popular movies that align loosely with the user’s interest.
-
-    Ensure that the order is: exact title match first (if applicable), followed by genre or theme-related movies, and then other relevant suggestions.
-
-    Only respond with an array of movie names as strings. If unable to provide at least five distinct movie names, respond with an empty array. Format your response as follows: ["Movie1", "Movie2", "Movie3", ...].
-  `;
+      You are a "Movie Recommendation System". Based on the user's interest in "${promptValue}", provide a list of movies that are closely related to this interest.
+  
+      If "${promptValue}" matches a specific movie title, list that movie first. After that, include movies that fit the same genre or theme. Finally, include other relevant and popular movies that align loosely with the user’s interest.
+  
+      Only respond with an array of movie names as strings, formatted like: ["Movie1", "Movie2", "Movie3", ...].
+    `;
 
     try {
-      const completion = await client.chat.completions.create({
-        model: MODEL_NAME,
-        messages: [
-          {
-            role: "user",
-            content: gptQuery,
-          },
-        ],
-      });
+      const apiResponse = await generateText(gptQuery);
 
-      const gptRecommendedMovies =
-        completion.choices[0]?.message?.content?.trim() || "[]"; // Default to empty array if no content
+      const movieArray = JSON.parse(apiResponse);
 
-      // Parse the response to get the array of movies
-      const cleanedMovies = JSON.parse(gptRecommendedMovies);
-
-      if (Array.isArray(cleanedMovies)) {
-        dispatch(addRecommandedMovies(cleanedMovies));
+      // Check if the response is an array of strings
+      if (
+        Array.isArray(movieArray) &&
+        movieArray.every((movie) => typeof movie === "string")
+      ) {
+        dispatch(addRecommandedMovies(movieArray));
       } else {
-        console.error("Invalid response format:", cleanedMovies);
+        console.error("Unexpected response format:", movieArray);
+        alert("Failed to fetch a valid movie list. Please try again.");
       }
-
     } catch (error) {
       console.error("Error fetching movie recommendations:", error);
       alert("Failed to fetch movie recommendations. Please try again.");
+      throw(error)
     } finally {
       dispatch(toggleSearchBtn(false));
     }

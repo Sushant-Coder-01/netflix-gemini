@@ -11,7 +11,11 @@ import Carousel from "./Carousel";
 import downArrow from "../assets/icons/down-arrow-icon.png";
 import useSimilarMoviesByGenre from "../hooks/useSimilarMoviesByGenre";
 import SimilarMovies from "./SimilarMovies";
-import { cleanSimilarMovie } from "../redux/moviesSlice";
+import { cleanMovieDetails, cleanSimilarMovie } from "../redux/moviesSlice";
+import {
+  cleanGptGetSimilarMovieName,
+  clearReasonsToWatch,
+} from "../redux/gptSlice";
 
 const MovieTrailerPage = () => {
   const dispatch = useDispatch();
@@ -41,8 +45,16 @@ const MovieTrailerPage = () => {
   }, [pathname, selectedTrailer]);
 
   useEffect(() => {
-    return () => dispatch(cleanSimilarMovie());
-  }, [movieDetails]);
+    return () => dispatch(cleanMovieDetails());
+  }, []);
+
+  useEffect(() => {
+    return () => dispatch(cleanGptGetSimilarMovieName());
+  }, []);
+
+  useEffect(() => {
+    return () => dispatch(clearReasonsToWatch());
+  }, []);
 
   if (!movieDetails) return null;
 
@@ -132,7 +144,7 @@ const MovieTrailerPage = () => {
                   Why You Should Watch It?
                 </h1>
                 <div className=" justify-center h-auto">
-                  {gptReasonsToWatch ? (
+                  {gptReasonsToWatch?.length > 0 ? (
                     <Carousel items={gptReasonsToWatch} />
                   ) : (
                     <CarouselShimmer />
@@ -141,7 +153,7 @@ const MovieTrailerPage = () => {
               </div>
               <div className="hidden md:block h-auto mt-12">
                 <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
-                {movieDetails ? (
+                {gptGetSimilarMovieNames ? (
                   <SimilarMovies />
                 ) : (
                   <>
@@ -244,7 +256,7 @@ const MovieTrailerPage = () => {
           </div>
           <div className="md:hidden h-auto pb-5 mt-10">
             <h1 className="text-2xl font-bold m-5">Similar Movies</h1>
-            {movieDetails ? (
+            {gptGetSimilarMovieNames ? (
               <SimilarMovies />
             ) : (
               <>

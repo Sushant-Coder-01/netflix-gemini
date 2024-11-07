@@ -49,7 +49,7 @@ const MovieDetailsModal = ({
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide">
               {title}
             </h2>
-            <p className="text-sm sm:text-base md:text-md text-gray-300 leading-relaxed">
+            <p className="text-sm line-clamp-6 sm:text-base md:text-md text-gray-300 leading-relaxed">
               {overview}
             </p>
             <div className="flex flex-col items-start space-y-2 sm:space-y-4">

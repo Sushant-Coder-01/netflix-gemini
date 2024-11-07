@@ -21,4 +21,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+node_modules/
+.firebase/
+.firebaserc
+functions/.runtimeconfig.json
+firebase.json
+.firebaserc
 .env

@@ -60,7 +60,7 @@ const BannerContent = ({ title, overview, movieId }) => {
                 </div>
               </>
             ) : (
-              <div className="w-32 md:w-64 mt-48 md:mt-96">
+              <div className="w-32 md:w-64 mt-40 md:mt-96">
                 {filePath ? (
                   <img
                     src={`https://image.tmdb.org/t/p/original/${filePath}`}

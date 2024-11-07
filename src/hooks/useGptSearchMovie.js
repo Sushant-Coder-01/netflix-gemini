@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux";
 import { GET_OPTIONS } from "../utils/constants";
 import { useEffect } from "react";
-import { addSimilarMovie } from "../redux/moviesSlice";
+import { addSimilarMovie, cleanSimilarMovie } from "../redux/moviesSlice";
 
 const useGptSearchMovie = (gptGetSimilarMovieNames) => {
   const dispatch = useDispatch();
 
   const getGptSearchMovie = async () => {
     try {
+
+      dispatch(cleanSimilarMovie());
+
       const genreMoviesMap = await Promise.all(
         gptGetSimilarMovieNames?.map(async ({ genre, movies }) => { 
           const moviePromises = movies?.map((movieName) =>
@@ -61,6 +64,7 @@ const useGptSearchMovie = (gptGetSimilarMovieNames) => {
 
   useEffect(() => {
     if (gptGetSimilarMovieNames) {
+      dispatch(cleanSimilarMovie());
       getGptSearchMovie();
     }
   }, [gptGetSimilarMovieNames]);

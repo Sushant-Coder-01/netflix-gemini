@@ -31,7 +31,10 @@ const Login = () => {
 
   const handleButtonClick = () => {
     const message = isSignIn
-      ? validateFormDataForSignIn(email.current.value.trim(), password.current.value.trim())
+      ? validateFormDataForSignIn(
+          email.current.value.trim(),
+          password.current.value.trim()
+        )
       : validateFormDataForSignUp(
           fullName.current.value.trim(),
           userName.current.value.trim(),
@@ -114,12 +117,17 @@ const Login = () => {
             {isSignIn ? "Sign In" : "Sign Up"}
           </h1>
           {!isSignIn && (
-            <input
-              ref={fullName}
-              type="text"
-              placeholder="Full Name"
-              className="p-3 my-3 mx-4 rounded-md  bg-white bg-opacity-20 "
-            ></input>
+            <>
+              <input
+                ref={fullName}
+                type="text"
+                placeholder="Full Name"
+                className="p-3 my-3 mx-4 rounded-md  bg-white bg-opacity-20 "
+              ></input>
+              <p className="px-4 text-xs text-gray-400">
+                Start with a capital letter (e.g., John Doe)
+              </p>
+            </>
           )}
           {!isSignIn && errorMessage === "fullName is not valid!" && (
             <div>
@@ -130,12 +138,18 @@ const Login = () => {
             </div>
           )}
           {!isSignIn && (
-            <input
-              ref={userName}
-              type="text"
-              placeholder="Username"
-              className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
-            ></input>
+            <>
+              <input
+                ref={userName}
+                type="text"
+                placeholder="Username"
+                className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
+              ></input>
+              <p className="px-4 text-xs text-gray-400">
+                3-20 characters, lowercase, numbers, and underscore (e.g.,
+                user_123)
+              </p>
+            </>
           )}
           {!isSignIn && errorMessage === "userName is not valid!" && (
             <div>
@@ -149,12 +163,17 @@ const Login = () => {
           {errorMessage === "Both are Invalid!" && (
             <p className="text-red-700 mx-4">{errorMessage}</p>
           )}
-          <input
-            ref={email}
-            type="email"
-            placeholder="E-mail"
-            className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
-          ></input>
+          <>
+            <input
+              ref={email}
+              type="email"
+              placeholder="E-mail"
+              className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
+            ></input>
+            <p className="px-4 text-xs text-gray-400">
+              Enter a valid email (e.g., user123@example.com)
+            </p>
+          </>
 
           {errorMessage === "E-mail is not valid!" && (
             <p className="text-red-700 mx-4">{errorMessage}</p>
@@ -167,12 +186,18 @@ const Login = () => {
             </p>
           )}
 
-          <input
-            ref={password}
-            type="password"
-            placeholder="Password"
-            className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
-          ></input>
+          <>
+            <input
+              ref={password}
+              type="password"
+              placeholder="Password"
+              className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
+            ></input>
+            <p className="px-4 text-xs text-gray-400">
+              Min. 8 characters, 1 uppercase, 1 number, 1 special char (e.g.,
+              Password@123)
+            </p>
+          </>
 
           {errorMessage === "Password is not valid!" && (
             <p className="text-red-700 mx-4">{errorMessage}</p>
