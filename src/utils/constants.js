@@ -54,8 +54,6 @@ export const OPENROUTER_GOOGLE_GEMMA_2_9B_A_29 =
 export const OPENROUTER_MYTHOMAX_L2_13B =
   process.env.REACT_APP_OPENROUTER_MYTHOMAX_L2_13B; // gryphe/mythomax-l2-13b:free
 
-export const GEMINI_API_KEY = process.env.REACT_APP_GEMINI_API_KEY
-
 export const MODEL_NAME = "google/gemma-2-9b-it:free";
 
 export const MODEL_API_KEY = OPENROUTER_GOOGLE_GEMMA_2_9B_A_29;

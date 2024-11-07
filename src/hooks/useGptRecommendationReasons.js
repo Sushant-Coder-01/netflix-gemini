@@ -62,6 +62,7 @@ const useGptRecommendationReasons = (movieDetails) => {
       }
     } catch (error) {
       console.error("Error fetching movies reasons:", error);
+      alert("Failed to fetch movies reasons.")
     }
   };
 

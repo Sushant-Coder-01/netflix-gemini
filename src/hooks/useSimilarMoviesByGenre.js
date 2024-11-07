@@ -63,6 +63,7 @@ const useSimilarMoviesByGenre = (movieDetails) => {
       }
     } catch (error) {
       console.error("Error fetching similar movies by genre:", error);
+      alert("Failedto fetch similar movies by genre");
     }
   };
 

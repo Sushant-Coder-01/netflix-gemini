@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 const Login = () => {
   const [isSignIn, setisSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
+  const [showPassword, setShowPassword] = useState(false);
 
   const email = useRef(null);
   const password = useRef(null);
@@ -27,6 +28,10 @@ const Login = () => {
 
   const handlerSignInBtn = () => {
     setisSignIn(!isSignIn);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
   const handleButtonClick = () => {
@@ -105,11 +110,12 @@ const Login = () => {
       <HomePageLogo />
       <div
         className="relative w-11/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 
-                h-3/4 sm:h-4/5 md:h-5/6 p-4 sm:p-6 md:p-8
+                h-3/4 sm:h-4/5 md:h-5/6 p-4 md:p-8
                 bg-black bg-opacity-70 rounded-md top-1/2 left-1/2 
                 transform -translate-x-1/2 -translate-y-1/2"
       >
         <form
+          autoComplete="off"
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col p-4 text-white"
         >
@@ -165,6 +171,7 @@ const Login = () => {
           )}
           <>
             <input
+              autoComplete="off"
               ref={email}
               type="email"
               placeholder="E-mail"
@@ -186,18 +193,40 @@ const Login = () => {
             </p>
           )}
 
-          <>
-            <input
-              ref={password}
-              type="password"
-              placeholder="Password"
-              className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20"
-            ></input>
-            <p className="px-4 text-xs text-gray-400">
+          <div className="relative flex flex-col">
+            <div className="flex space-x-1">
+              <input
+                autoComplete="off"
+                ref={password}
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className="p-3 my-3 mx-4 rounded-md bg-white bg-opacity-20 w-full"
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="bg-gray-600 p-1 rounded-sm text-sm absolute right-6 top-6"
+              >
+                {showPassword ? (
+                  <img
+                    className="w-6 h-5"
+                    src="https://img.icons8.com/ios-glyphs/30/FFFFFF/hide.png"
+                    alt="hide"
+                  />
+                ) : (
+                  <img
+                    className="w-6 h-5"
+                    src="https://img.icons8.com/material-rounded/24/FFFFFF/visible.png"
+                    alt="visible"
+                  />
+                )}
+              </button>
+            </div>
+            <p className="px-4 text-xs text-gray-400 w-full">
               Min. 8 characters, 1 uppercase, 1 number, 1 special char (e.g.,
               Password@123)
             </p>
-          </>
+          </div>
 
           {errorMessage === "Password is not valid!" && (
             <p className="text-red-700 mx-4">{errorMessage}</p>
