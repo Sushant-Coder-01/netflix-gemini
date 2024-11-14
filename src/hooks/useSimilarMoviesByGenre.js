@@ -13,13 +13,13 @@ const useSimilarMoviesByGenre = (movieDetails) => {
     const genres = movieDetails?.genres?.map((genre) => genre?.name);
     const genresString = genres?.join(", ");
 
-    const gptQuery = `For each genre in the list ${genresString}, list exactly 5 popular movies in the following JSON format:
-  
-      [
-      { "genre": "genere name", "movies": ["movieName1", "movieName2", "movieName3", "movieName4", "movieName5"] },
-      ]
-  
-      Respond with JSON only, without any additional explanation or text.
+  const gptQuery = `For each genre in the list ${genresString}, list exactly 5 popular movies in the following JSON format (without quotes around the entire response):
+
+    [
+      { "genre": "genre name", "movies": ["movieName1", "movieName2", "movieName3", "movieName4", "movieName5"] }
+    ]
+    
+    Respond with JSON only, without any additional explanation or text.
     `;
 
     // try {

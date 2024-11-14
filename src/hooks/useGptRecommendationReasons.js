@@ -11,16 +11,17 @@ const useGptRecommendationReasons = (movieDetails) => {
 
   const fetchGptRecommendationReasons = async () => {
     const gptQuery = `
-    Provide exactly and only a JSON array of strings containing 5 brief reasons (each a maximum of 1 line) why someone should watch the movie "${movieDetails?.title}".
-    If unable to provide at least five distinct reasons, respond with exactly: [].
+    Provide exactly and only a JSON array of strings, each containing a single, brief reason why someone should watch the movie "${movieDetails?.title}". Each reason should be concise and no longer than one line.
 
-    Respond in the following JSON format without any additional text, labels, or explanations:
-    [ 
-      "reason1",
-      "reason2",
-      "reason3",
-      "reason4",
-      "reason5"
+    If you cannot provide at least five distinct reasons, respond with an empty array: [].
+
+    Respond only with JSON in this exact format (no surrounding quotes around the array):
+    [
+      "Reason 1",
+      "Reason 2",
+      "Reason 3",
+      "Reason 4",
+      "Reason 5"
     ]
 `;
 
@@ -62,7 +63,7 @@ const useGptRecommendationReasons = (movieDetails) => {
       }
     } catch (error) {
       console.error("Error fetching movies reasons:", error);
-      alert("Failed to fetch movies reasons.")
+      alert("Failed to fetch movies reasons.");
     }
   };
 

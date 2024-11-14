@@ -21,10 +21,12 @@ const useGeminiAPI = () => {
       // Generate content based on the prompt
       const result = await model.generateContent(prompt);
 
+      console.log(result.response.text());
+
       // Await text response and set it in the state
       const textResponse = result.response.text();
       setResponse(textResponse);
-      console.log("Generated Response: ", textResponse);
+      // console.log(textResponse);
 
       return textResponse; // Return response text for additional processing if needed
     } catch (err) {
