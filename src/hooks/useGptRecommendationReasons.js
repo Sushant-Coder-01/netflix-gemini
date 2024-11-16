@@ -13,8 +13,6 @@ const useGptRecommendationReasons = (movieDetails) => {
     const gptQuery = `
     Provide exactly and only a JSON array of strings, each containing a single, brief reason why someone should watch the movie "${movieDetails?.title}". Each reason should be concise and no longer than one line.
 
-    If you cannot provide at least five distinct reasons, respond with an empty array: [].
-
     Respond only with JSON in this exact format (no surrounding quotes around the array):
     [
       "Reason 1",
@@ -23,6 +21,9 @@ const useGptRecommendationReasons = (movieDetails) => {
       "Reason 4",
       "Reason 5"
     ]
+    
+    If you cannot provide at least five distinct reasons, respond with an empty array: [].
+
 `;
 
     // try {

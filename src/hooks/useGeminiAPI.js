@@ -15,7 +15,7 @@ const useGeminiAPI = () => {
       // Initialize the Gemini API
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-pro",
+        model: "gemini-1.5-flash-8b",
       });
 
       // Generate content based on the prompt
