@@ -21,9 +21,6 @@ const useGptRecommendationReasons = (movieDetails) => {
       "Reason 4",
       "Reason 5"
     ]
-    
-    If you cannot provide at least five distinct reasons, respond with an empty array: [].
-
 `;
 
     // try {
