@@ -1,4 +1,10 @@
-# Netflix-GPT
+# Netflix-Gemini
+
+## Netflix-Gemini App Demo
+
+[![MatchMe Demo](https://img.youtube.com/vi/HLSxLVJW3TQ/0.jpg)](https://www.youtube.com/watch?v=HLSxLVJW3TQ)
+
+## Tasks
 
     - Run `npx create-react-app` to create react app.
     - Configure the TailwindCSS.
@@ -6,10 +12,10 @@
     - Routing of our app
     - Login Page
     - Sign Up Page
-    - Form Validation 
+    - Form Validation
     - useRef() Hook
     - Firebase Setup
-    - Deploy app to production 
+    - Deploy app to production
     - Create Sign Up User account.
     - Implemented Sign-in user API
     - Create User Store with userSlice.
@@ -25,7 +31,7 @@
     - Custom hook for now playing movies
     - Fetch data for trailer video
     - Update store with trailerVideo Data
-    - Embedded the Youtube video and make it AutoPlay and mute
+    - Embedded the `Youtube` video and make it AutoPlay and mute
     - Improve UI for HeroBanner Page
     - Build Movie List & Cards
     - Use TMDB CDN_URL ( Image )
@@ -34,7 +40,7 @@
     - GPT Search Page
     - GPT Search Bar
     - (*) Multi-language Feature in our App
-    - 
+    -
 
 ## Project-Plan
 
@@ -54,8 +60,8 @@
 - **Header**
   - Navigation links (Home, Watchlist, Profile)
   - Search bar for quick movie lookup
-  
 - **Main Movie Section**
+
   - Featured movie trailer in the background
   - Movie title and description overlay
   - Dynamic movie suggestions based on user preferences
@@ -69,6 +75,7 @@
 ### 3. NetflixGPT Feature
 
 - **Search Bar**
+
   - AI-powered search that understands natural language queries
 
 - **Personalized Recommendations**
@@ -78,6 +85,7 @@
 ### 4. Unique Features
 
 - **Watch Together Feature**
+
   - Allow users to invite friends to watch movies simultaneously (simulated version)
 
 - **Customizable User Profiles**
@@ -86,9 +94,11 @@
 ### 5. Enhanced User Experience
 
 - **Interactive UI Elements**
+
   - Use Tailwind CSS for animations and transitions
 
 - **Dynamic Content Loading**
+
   - Implement lazy loading for movie lists using React's `Suspense`
 
 - **Dark Mode**
@@ -97,9 +107,11 @@
 ### 6. Advanced Functionalities
 
 - **Watchlist Management**
+
   - Store watchlist in Redux state and local storage
 
 - **Reminders and Notifications**
+
   - Use the browser's Notification API for user reminders
 
 - **User Feedback Loop**
